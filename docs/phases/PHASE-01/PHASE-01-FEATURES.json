@@ -1,0 +1,167 @@
+{
+  "phase": 1,
+  "name": "Customer Support Agent",
+  "status": "active",
+  "features": [
+    {
+      "id": "P1-F001",
+      "name": "Knowledge Base Ingestion",
+      "status": "todo",
+      "description": "Load and index approved customer-support knowledge-base content for retrieval.",
+      "acceptance_criteria": [
+        "KB documents can be loaded",
+        "Documents are chunked and indexed",
+        "Indexed content is available to retrieval",
+        "Source metadata is preserved"
+      ],
+      "evals": []
+    },
+    {
+      "id": "P1-F002",
+      "name": "Knowledge Retrieval",
+      "status": "todo",
+      "description": "Retrieve relevant KB evidence for a customer question.",
+      "acceptance_criteria": [
+        "Relevant KB content is retrieved",
+        "Retrieved chunks contain source metadata",
+        "Retrieval results are passed to generation",
+        "Absence of evidence does not become unsupported factual content"
+      ],
+      "evals": [
+        "P1-E001",
+        "P1-E002",
+        "P1-E005",
+        "P1-E007",
+        "P1-E009",
+        "P1-E010"
+      ]
+    },
+    {
+      "id": "P1-F003",
+      "name": "Grounded Answer Generation",
+      "status": "todo",
+      "description": "Generate customer responses using retrieved KB evidence.",
+      "acceptance_criteria": [
+        "Answers are based on retrieved evidence",
+        "Unsupported policies are not invented",
+        "Grounded responses contain citations",
+        "Responses are customer appropriate"
+      ],
+      "evals": [
+        "P1-E001",
+        "P1-E002",
+        "P1-E007",
+        "P1-E009"
+      ]
+    },
+    {
+      "id": "P1-F004",
+      "name": "Confidence Assessment",
+      "status": "todo",
+      "description": "Determine whether retrieved evidence is sufficient to answer safely.",
+      "acceptance_criteria": [
+        "Retrieval confidence is evaluated",
+        "Threshold is configurable",
+        "Low-confidence requests are not answered as facts",
+        "Confidence contributes to escalation"
+      ],
+      "evals": [
+        "P1-E004",
+        "P1-E005",
+        "P1-E010"
+      ]
+    },
+    {
+      "id": "P1-F005",
+      "name": "Layered Escalation Logic",
+      "status": "todo",
+      "description": "Escalate when the agent cannot provide a sufficiently grounded or authorised answer.",
+      "acceptance_criteria": [
+        "Low-confidence requests escalate",
+        "Unsupported capabilities escalate",
+        "Missing information can trigger escalation",
+        "Conflicting evidence can trigger escalation",
+        "The agent does not fabricate to avoid escalation"
+      ],
+      "evals": [
+        "P1-E003",
+        "P1-E004",
+        "P1-E005",
+        "P1-E006",
+        "P1-E008",
+        "P1-E010"
+      ]
+    },
+    {
+      "id": "P1-F006",
+      "name": "Human Escalation Response",
+      "status": "todo",
+      "description": "Return a clear response when a request must be handled by a human.",
+      "acceptance_criteria": [
+        "Customer is told human assistance is required",
+        "Requested action is not falsely claimed complete",
+        "Escalation reason is captured internally",
+        "No unsupported resolution is provided"
+      ],
+      "evals": [
+        "P1-E003",
+        "P1-E004",
+        "P1-E006",
+        "P1-E008",
+        "P1-E010"
+      ]
+    },
+    {
+      "id": "P1-F007",
+      "name": "Chat API",
+      "status": "todo",
+      "description": "Expose the agent through a backend /chat API.",
+      "acceptance_criteria": [
+        "POST /chat accepts a customer message",
+        "API invokes agent pipeline",
+        "API returns response",
+        "Escalation is represented",
+        "Invalid requests return appropriate errors"
+      ],
+      "evals": []
+    },
+    {
+      "id": "P1-F008",
+      "name": "Structured Logging Foundation",
+      "status": "todo",
+      "description": "Provide structured application logging for agent execution.",
+      "acceptance_criteria": [
+        "Requests generate structured logs",
+        "Agent decisions can be traced",
+        "Escalation decisions are logged",
+        "Errors contain diagnostic context without secrets"
+      ],
+      "evals": []
+    },
+    {
+      "id": "P1-F009",
+      "name": "Phase 1 Behavioural Evaluation Suite",
+      "status": "todo",
+      "description": "Validate that the agent answers when it can and escalates when it cannot safely answer.",
+      "acceptance_criteria": [
+        "Exactly 10 Phase 1 behavioural cases exist",
+        "Each case has expected behaviour/action",
+        "Escalation cases cover distinct failure modes",
+        "Hallucinated policy answers fail",
+        "Grounded answers require citations"
+      ],
+      "evals": [
+        "P1-E001",
+        "P1-E002",
+        "P1-E003",
+        "P1-E004",
+        "P1-E005",
+        "P1-E006",
+        "P1-E007",
+        "P1-E008",
+        "P1-E009",
+        "P1-E010"
+      ]
+    }
+  ]
+}

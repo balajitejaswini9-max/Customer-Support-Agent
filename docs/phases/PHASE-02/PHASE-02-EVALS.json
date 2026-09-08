@@ -1,0 +1,241 @@
+{
+"phase": 2,
+"name": "Frontend Behavioural Evaluation Suite",
+"evaluation_rules": {
+"api_boundary": "Frontend behaviour must be evaluated against the Phase 1 /chat contract.",
+"business_logic": "Frontend must not reproduce backend RAG, policy, eligibility, or escalation logic.",
+"determinism": "Prefer deterministic browser/component assertions over subjective visual evaluation.",
+"scope": "Evaluations must validate Phase 2 functionality only."
+},
+"evaluations": [
+{
+"id": "P2-E001",
+"name": "Submit Customer Message",
+"scenario": "Customer enters a non-empty support question and submits it.",
+"expected_action": "submit",
+"expected_behaviour": "The message is sent to POST /chat and appears in the conversation.",
+"assertions": [
+"POST /chat is called once",
+"Request contains the entered message",
+"Customer message is rendered"
+],
+"failure_conditions": [
+"Message is not submitted",
+"Wrong endpoint is called",
+"Message is submitted more than once"
+]
+},
+{
+"id": "P2-E002",
+"name": "Reject Empty Message",
+"scenario": "Customer attempts to submit an empty or whitespace-only message.",
+"expected_action": "reject",
+"expected_behaviour": "The frontend does not call the API.",
+"assertions": [
+"POST /chat is not called",
+"Customer remains on the chat screen"
+],
+"failure_conditions": [
+"Empty request is sent",
+"Whitespace-only request is sent"
+]
+},
+{
+"id": "P2-E003",
+"name": "Render Grounded Answer",
+"scenario": "Backend returns a normal grounded answer.",
+"expected_action": "render_answer",
+"expected_behaviour": "The frontend displays the returned answer without changing its meaning.",
+"mock_response": {
+"answer": "Standard delivery usually takes 3–5 business days.",
+"sources": [
+{
+"source": "shipping_info.txt",
+"section": "Shipping Information"
+}
+],
+"escalated": false,
+"escalation_reason": null
+},
+"assertions": [
+"Answer text is visible",
+"Response is represented as an agent message",
+"Escalation state is not displayed as active"
+],
+"failure_conditions": [
+"Answer is hidden",
+"Frontend changes the substantive answer",
+"Response is incorrectly shown as escalated"
+]
+},
+{
+"id": "P2-E004",
+"name": "Handle Successful API Response",
+"scenario": "POST /chat returns HTTP success with a valid response.",
+"expected_action": "complete",
+"expected_behaviour": "Loading state ends and the response is displayed.",
+"assertions": [
+"Loading indicator disappears after completion",
+"Agent response is rendered",
+"Input becomes available for another request"
+],
+"failure_conditions": [
+"UI remains stuck loading",
+"Response is not rendered",
+"Input remains permanently disabled"
+]
+},
+{
+"id": "P2-E005",
+"name": "Handle API Failure",
+"scenario": "POST /chat fails.",
+"expected_action": "show_error",
+"expected_behaviour": "A user-friendly error is shown and the customer can retry.",
+"assertions": [
+"Error state is visible",
+"Raw backend stack trace is not visible",
+"Retry is possible"
+],
+"failure_conditions": [
+"Application crashes",
+"Raw exception is displayed",
+"Customer cannot retry"
+]
+},
+{
+"id": "P2-E006",
+"name": "Display Sources",
+"scenario": "Backend returns one or more source citations.",
+"expected_action": "display_sources",
+"expected_behaviour": "Returned source metadata is displayed alongside the answer.",
+"mock_response": {
+"answer": "Standard delivery usually takes 3–5 business days.",
+"sources": [
+{
+"source": "shipping_info.txt",
+"section": "Shipping Information"
+}
+],
+"escalated": false,
+"escalation_reason": null
+},
+"assertions": [
+"shipping_info.txt is visible",
+"Shipping Information is visible"
+],
+"failure_conditions": [
+"Source is omitted",
+"Incorrect source is displayed",
+"New source information is fabricated"
+]
+},
+{
+"id": "P2-E007",
+"name": "Present Escalation",
+"scenario": "Backend returns escalated=true.",
+"expected_action": "display_escalation",
+"expected_behaviour": "The customer is clearly informed that human assistance is required.",
+"mock_response": {
+"answer": "I’m unable to safely resolve this request automatically. Human assistance is required.",
+"sources": [],
+"escalated": true,
+"escalation_reason": "unsupported_capability"
+},
+"assertions": [
+"Escalation is visually distinguishable",
+"Human assistance requirement is communicated",
+"No false completion message is shown"
+],
+"failure_conditions": [
+"Escalation is presented as a normal completed transaction",
+"Frontend claims the issue was resolved",
+"Frontend claims a human reviewed the case"
+]
+},
+{
+"id": "P2-E008",
+"name": "Do Not Invent Escalation Actions",
+"scenario": "Backend returns an escalation response without a ticket or notification field.",
+"expected_action": "display_only",
+"expected_behaviour": "Frontend communicates escalation without claiming ticket creation, email, or human review.",
+"assertions": [
+"No ticket-created message is displayed",
+"No email-sent message is displayed",
+"No human-reviewed message is displayed"
+],
+"failure_conditions": [
+"Frontend invents a ticket number",
+"Frontend claims support has been notified",
+"Frontend claims a human has reviewed the request"
+]
+},
+{
+"id": "P2-E009",
+"name": "Prevent Duplicate Submission",
+"scenario": "Customer submits a message and attempts to submit it again before the first request completes.",
+"expected_action": "single_request",
+"expected_behaviour": "Only one API request is made while the request is pending.",
+"assertions": [
+"Only one POST /chat request is generated",
+"Loading state is visible",
+"Duplicate submission is blocked"
+],
+"failure_conditions": [
+"Multiple requests are generated",
+"Same message is submitted repeatedly"
+]
+},
+{
+"id": "P2-E010",
+"name": "Recover After API Error",
+"scenario": "The first request fails and the customer retries.",
+"expected_action": "retry",
+"expected_behaviour": "The customer can submit another request after the failure.",
+"assertions": [
+"Error is displayed",
+"Input is usable again",
+"Retry generates a new API request"
+],
+"failure_conditions": [
+"Input remains disabled",
+"Retry does not generate a request",
+"Application requires a page refresh"
+]
+},
+{
+"id": "P2-E011",
+"name": "Responsive Chat Layout",
+"scenario": "Customer uses the application at desktop and mobile-sized viewport widths.",
+"expected_action": "remain_usable",
+"expected_behaviour": "Core chat functionality remains usable without horizontal overflow or inaccessible controls.",
+"assertions": [
+"Message input remains accessible",
+"Submit control remains accessible",
+"Messages remain readable",
+"No required interaction depends on hover"
+],
+"failure_conditions": [
+"Input becomes inaccessible",
+"Submit control is off-screen",
+"Horizontal overflow prevents normal use"
+]
+},
+{
+"id": "P2-E012",
+"name": "Keyboard Accessibility",
+"scenario": "Customer uses keyboard navigation instead of a mouse.",
+"expected_action": "usable",
+"expected_behaviour": "Customer can reach and operate the primary chat controls using the keyboard.",
+"assertions": [
+"Message input can receive keyboard focus",
+"Submit action is keyboard accessible",
+"Focus is visibly identifiable"
+],
+"failure_conditions": [
+"Primary control cannot receive focus",
+"Keyboard user cannot submit",
+"Focus state is not perceivable"
+]
+}
+]
+}

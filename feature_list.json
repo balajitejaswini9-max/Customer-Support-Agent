@@ -1,0 +1,127 @@
+{
+  "current_phase": 1,
+  "phase_source": "docs/phases/PHASE-01/PHASE-01.md",
+  "features": [
+    {
+      "id": "P0-F001",
+      "phase": 0,
+      "name": "Repository harness",
+      "status": "done",
+      "evals": ["bash init.sh"],
+      "evidence": ["init.sh", "src/", "tests/"]
+    },
+    {
+      "id": "P0-F002",
+      "phase": 0,
+      "name": "Stable product/architecture/reliability docs",
+      "status": "done",
+      "evals": ["docs exist", "architecture covers all phases", "product remains phase-neutral"],
+      "evidence": ["docs/PRODUCT.md", "docs/ARCHITECTURE.md", "docs/RELIABILITY.md"]
+    },
+    {
+      "id": "P0-F003",
+      "phase": 0,
+      "name": "Phase-specific documentation",
+      "status": "done",
+      "evals": ["active phase document exists", "future phases are not implementation scope"],
+      "evidence": ["docs/phases/PHASE-00.md", "docs/phases/PHASE-01/PHASE-01.md"]
+    },
+    {
+      "id": "P0-F004",
+      "phase": 0,
+      "name": "Agent operating instructions",
+      "status": "done",
+      "evals": ["agent can identify source-of-truth files", "agent can identify active phase"],
+      "evidence": ["AGENTS.md", "CLAUDE.md"]
+    },
+    {
+      "id": "P0-F005",
+      "phase": 0,
+      "name": "Feature/evaluation ledger",
+      "status": "done",
+      "evals": ["every feature has evals", "current_phase is explicit", "evidence can be recorded"],
+      "evidence": ["feature_list.json"]
+    },
+    {
+      "id": "P0-F006",
+      "phase": 0,
+      "name": "Startup and test verification",
+      "status": "done",
+      "evals": ["bash init.sh", "python -m pytest"],
+      "evidence": ["init.sh", "tests/"]
+    },
+    {
+      "id": "P0-F007",
+      "phase": 0,
+      "name": "Session handoff",
+      "status": "done",
+      "evals": ["handoff identifies phase, feature, verification, issues, and next action"],
+      "evidence": ["session-handoff.md"]
+    },
+    {
+      "id": "P1-F001",
+      "phase": 1,
+      "name": "Knowledge-base ingestion",
+      "status": "done",
+      "evals": ["all seed KB documents load", "chunks retain source metadata", "ingestion is reproducible"],
+      "evidence": ["src/ingestion.py", "knowledge_base/faq.md", "knowledge_base/return_policy.txt", "knowledge_base/shipping_info.txt", "tests/test_ingestion.py"]
+    },
+    {
+      "id": "P1-F002",
+      "phase": 1,
+      "name": "Embeddings and vector store",
+      "status": "done",
+      "evals": ["embedding dimension is 384", "documents are persisted in ChromaDB", "same input produces reproducible index contents"],
+      "evidence": ["src/embeddings.py", "src/vector_store.py"],
+      "notes": "Embedding backend: fastembed (ONNX Runtime, CPU-only) running all-MiniLM-L6-v2. Migrated from sentence-transformers to remove GPU/PyTorch dependency. All tests pass."
+    },
+    {
+      "id": "P1-F003",
+      "phase": 1,
+      "name": "Similarity retrieval",
+      "status": "done",
+      "evals": ["relevant KB evidence ranks above irrelevant evidence", "source metadata is preserved", "top-k is bounded"],
+      "evidence": ["src/retrieval.py", "tests/test_retrieval.py"]
+    },
+    {
+      "id": "P1-F004",
+      "phase": 1,
+      "name": "Grounded Claude generation with citations",
+      "status": "done",
+      "evals": ["4 grounded cases answer", "answers cite supporting sources", "unsupported claims are not generated"],
+      "evidence": ["src/generation.py", "tests/eval_phase1.py"]
+    },
+    {
+      "id": "P1-F005",
+      "phase": 1,
+      "name": "Layered escalation",
+      "status": "done",
+      "evals": ["retrieval guard escalates on low similarity", "grounding guard escalates on INSUFFICIENT_CONTEXT", "scope guard escalates disputes/orders/financial actions"],
+      "evidence": ["src/escalation.py", "src/generation.py", "tests/eval_phase1.py"]
+    },
+    {
+      "id": "P1-F006",
+      "phase": 1,
+      "name": "FastAPI /chat endpoint",
+      "status": "done",
+      "evals": ["valid request returns contract", "invalid request fails safely", "API delegates business logic to agent core"],
+      "evidence": ["src/api.py"]
+    },
+    {
+      "id": "P1-F007",
+      "phase": 1,
+      "name": "Structured logging foundation",
+      "status": "done",
+      "evals": ["request ID is logged", "retrieval/escalation/latency fields are logged", "secrets are not logged"],
+      "evidence": ["src/logging_config.py", "src/agent.py"]
+    },
+    {
+      "id": "P1-F008",
+      "phase": 1,
+      "name": "Phase 1 behavioural evaluation suite",
+      "status": "done",
+      "evals": ["10 cases execute", "4 grounded answers pass", "6 escalation cases escalate", "assertion-based results are deterministic"],
+      "evidence": ["docs/phases/PHASE-01/PHASE-01-EVALS.json", "tests/eval_phase1.py"]
+    }
+  ]
+}

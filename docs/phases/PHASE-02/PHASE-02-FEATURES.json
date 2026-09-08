@@ -1,0 +1,120 @@
+{
+"phase": 2,
+"name": "Customer Support Frontend",
+"status": "planned",
+"features": [
+{
+"id": "P2-F001",
+"name": "Chat Interface",
+"status": "todo",
+"description": "Provide a customer-facing interface for submitting support questions and viewing the conversation.",
+"acceptance_criteria": [
+"Customer can enter a message",
+"Customer can submit a message",
+"Submitted messages are rendered",
+"Agent responses are rendered",
+"Empty messages cannot be submitted"
+],
+"evals": [
+"P2-E001",
+"P2-E002"
+]
+},
+{
+"id": "P2-F002",
+"name": "Chat API Integration",
+"status": "todo",
+"description": "Connect the frontend to the Phase 1 POST /chat API.",
+"acceptance_criteria": [
+"Frontend sends the expected request payload",
+"Frontend handles successful API responses",
+"Frontend handles API errors",
+"Frontend does not implement backend business logic"
+],
+"evals": [
+"P2-E003",
+"P2-E004",
+"P2-E005"
+]
+},
+{
+"id": "P2-F003",
+"name": "Source Citation Display",
+"status": "todo",
+"description": "Display source information returned by the backend.",
+"acceptance_criteria": [
+"Returned sources are displayed",
+"Source name is displayed",
+"Section is displayed when provided",
+"No source is fabricated when the API returns none"
+],
+"evals": [
+"P2-E006"
+]
+},
+{
+"id": "P2-F004",
+"name": "Escalation Presentation",
+"status": "todo",
+"description": "Clearly present responses that require human assistance.",
+"acceptance_criteria": [
+"Escalated responses are visibly distinguishable",
+"The customer is told that human assistance is required",
+"The frontend does not claim a ticket or human review unless supplied by the API",
+"Escalation reason is not fabricated"
+],
+"evals": [
+"P2-E007",
+"P2-E008"
+]
+},
+{
+"id": "P2-F005",
+"name": "Loading and Submission State",
+"status": "todo",
+"description": "Provide clear feedback while a chat request is being processed.",
+"acceptance_criteria": [
+"Loading state is displayed during an API request",
+"Duplicate submissions are prevented while pending",
+"The submitted message remains visible",
+"UI returns to an interactive state after completion"
+],
+"evals": [
+"P2-E009"
+]
+},
+{
+"id": "P2-F006",
+"name": "API Error Handling",
+"status": "todo",
+"description": "Handle failed chat requests without exposing implementation details.",
+"acceptance_criteria": [
+"A user-friendly error is displayed",
+"User can retry",
+"Raw stack traces are not displayed",
+"Application remains usable after failure"
+],
+"evals": [
+"P2-E005",
+"P2-E010"
+]
+},
+{
+"id": "P2-F007",
+"name": "Responsive and Accessible UI",
+"status": "todo",
+"description": "Make the support interface usable across common screen sizes and interaction methods.",
+"acceptance_criteria": [
+"Interface remains usable on mobile-sized screens",
+"Interface remains usable on desktop-sized screens",
+"Primary controls are keyboard accessible",
+"Input has an accessible label",
+"Loading and error states are perceivable"
+],
+"evals": [
+"P2-E011",
+"P2-E012"
+]
+}
+]
+}

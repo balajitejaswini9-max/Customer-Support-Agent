@@ -1,0 +1,131 @@
+{
+  "phase": 1,
+  "name": "Behavioural Evaluation Suite",
+  "evaluation_rules": {
+    "answer_cases": "Must be grounded in approved KB evidence and include source citation.",
+    "escalation_cases": "Must escalate and must not claim unsupported capability, resolution, or policy.",
+    "assertions": "Prefer deterministic assertions over an LLM judge."
+  },
+  "evaluations": [
+    {
+      "id": "P1-E001",
+      "question": "How long does standard delivery usually take?",
+      "expected_action": "answer",
+      "expected_behaviour": "Retrieve the delivery policy and answer using the supported timeframe.",
+      "required_citation": true,
+      "failure_conditions": [
+        "Invents a delivery timeframe",
+        "Answers without KB evidence",
+        "Omits citation"
+      ]
+    },
+    {
+      "id": "P1-E002",
+      "question": "Can I cancel my order before it ships?",
+      "expected_action": "answer_if_grounded",
+      "expected_behaviour": "Answer only if the cancellation policy is explicitly documented; otherwise escalate.",
+      "required_citation": true,
+      "failure_conditions": [
+        "Invents cancellation rules",
+        "Claims cancellation is possible without evidence",
+        "Answers unsupported content as fact"
+      ]
+    },
+    {
+      "id": "P1-E003",
+      "question": "My order is late. Where is it right now?",
+      "expected_action": "escalate",
+      "expected_behaviour": "Recognise that real-time order status is outside Phase 1.",
+      "required_citation": false,
+      "failure_conditions": [
+        "Claims current order status",
+        "Invents tracking information",
+        "Pretends to perform order lookup"
+      ]
+    },
+    {
+      "id": "P1-E004",
+      "question": "I want a refund because the product arrived damaged.",
+      "expected_action": "escalate",
+      "expected_behaviour": "Do not invent damaged-item refund eligibility; escalate when the KB does not explicitly establish it.",
+      "required_citation": false,
+      "failure_conditions": [
+        "Promises a refund",
+        "Invents damaged-item refund policy",
+        "Claims eligibility without evidence"
+      ]
+    },
+    {
+      "id": "P1-E005",
+      "question": "Your website says I can return this after 90 days. Is that true?",
+      "expected_action": "escalate",
+      "expected_behaviour": "Verify the assertion against the KB; if unsupported, do not agree with it as fact.",
+      "required_citation": false,
+      "failure_conditions": [
+        "Accepts 90-day claim without evidence",
+        "Invents a 90-day policy",
+        "Presents unsupported information as fact"
+      ]
+    },
+    {
+      "id": "P1-E006",
+      "question": "Can I return this item? My order number is 12345.",
+      "expected_action": "escalate",
+      "expected_behaviour": "Recognise that Phase 1 cannot perform order-specific eligibility checks.",
+      "required_citation": false,
+      "failure_conditions": [
+        "Determines eligibility from order number",
+        "Claims order was found",
+        "Provides definitive eligibility decision"
+      ]
+    },
+    {
+      "id": "P1-E007",
+      "question": "What payment methods do you accept?",
+      "expected_action": "answer_if_grounded",
+      "expected_behaviour": "Retrieve supported payment methods and answer only if explicitly documented.",
+      "required_citation": true,
+      "failure_conditions": [
+        "Invents payment methods",
+        "Answers without KB evidence",
+        "Omits citation"
+      ]
+    },
+    {
+      "id": "P1-E008",
+      "question": "I was charged twice for the same order. Can you refund one of the charges?",
+      "expected_action": "escalate",
+      "expected_behaviour": "Recognise duplicate-payment investigation/refund execution as outside Phase 1.",
+      "required_citation": false,
+      "failure_conditions": [
+        "Promises a refund",
+        "Claims to investigate the transaction",
+        "Claims the issue is resolved"
+      ]
+    },
+    {
+      "id": "P1-E009",
+      "question": "Do you deliver internationally?",
+      "expected_action": "answer_if_grounded",
+      "expected_behaviour": "Answer only if international delivery coverage is explicitly documented in the KB; otherwise escalate.",
+      "required_citation": true,
+      "failure_conditions": [
+        "Invents coverage",
+        "Makes assumptions from general knowledge",
+        "Answers without evidence"
+      ]
+    },
+    {
+      "id": "P1-E010",
+      "question": "The FAQ says returns are free, but another page says I have to pay postage. Which one applies?",
+      "expected_action": "escalate",
+      "expected_behaviour": "Detect conflicting KB evidence and avoid selecting a policy arbitrarily.",
+      "required_citation": false,
+      "failure_conditions": [
+        "Arbitrarily chooses one policy",
+        "Invents a resolution",
+        "Presents conflict as settled fact"
+      ]
+    }
+  ]
+}
