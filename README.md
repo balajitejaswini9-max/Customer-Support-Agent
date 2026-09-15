@@ -1,16 +1,30 @@
 # Building an AI Agent by Decomposing the Problem
 
-What happens when you give an AI coding agent a complex product requirement and ask it to build the whole thing?
+What happens when you give an AI coding agent a complex product requirement and simply ask it to **build the whole thing**?
 
 It can produce a lot of code.
 
-But how do you know it is solving the right problem, in the right order, with the right boundaries?
+But how do you know it is solving the **right problem**, in the **right order**, with the **right boundaries**?
 
 This project explores a different approach.
 
-## Start with the problem, not the code
+## The application
 
-Instead of turning the entire problem into one large prompt, I break it down into smaller engineering problems that can be implemented and verified independently.
+The application is a general e-commerce customer-support agent.
+
+It is designed to help customers with common support requests such as product questions, order information and returns.
+
+The agent uses a knowledge base to ground its responses and is designed to recognise when it does not have enough information or confidence to answer.
+
+Rather than asking the coding agent to build the entire application in one go, the problem is decomposed into smaller, focused phases.
+
+## The approach
+
+Start with the problem statement.
+
+Don't immediately turn it into code.
+
+First, **decompose the problem into smaller engineering problems**.
 
 ```text
                 Problem Statement
@@ -25,10 +39,10 @@ Instead of turning the entire problem into one large prompt, I break it down int
               Define boundaries
                        │
                        ▼
-             Define verification
+             Define how to verify it
                        │
                        ▼
-               Give it to agent
+               Give it to the agent
                        │
                        ▼
                   Implement
@@ -43,24 +57,40 @@ Instead of turning the entire problem into one large prompt, I break it down int
                 Next problem
 ```
 
-The application is built incrementally, with each step providing a verified foundation for the next.
+The application is built incrementally from these smaller, verifiable problems.
 
-## The repository becomes the harness
+## Breaking the problem into phases
 
-With AI coding agents, the challenge is increasingly less about whether the model can write code.
+The application is divided into a sequence of focused phases:
 
-The bigger challenge is giving it enough context and constraints to make good engineering decisions.
+```text
+Phase 0  →  Development structure
+Phase 1  →  Knowledge-based customer support
+Phase 2  →  Customer-facing interface
+Phase 3  →  Order lookup
+Phase 4  →  Return eligibility reasoning
+Phase 5  →  Escalation and human handoff
+Phase 6  →  Conversation persistence
+Phase 7  →  Observability and metrics
+Phase 8  →  Benchmarking and repository health
+```
+
+Each phase has its own scope, boundaries, acceptance criteria and evaluations.
+
+The coding agent works on one defined problem at a time rather than being asked to reason about the entire application simultaneously.
+
+## Giving the coding agent context
 
 A large prompt leaves many decisions to the model:
 
-* What should be built first?
-* What is out of scope?
-* Where are the boundaries?
-* What does "done" mean?
-* How should the result be verified?
-* What context needs to carry into the next session?
+* what to build first;
+* what not to build;
+* where the boundaries are;
+* what "done" means;
+* how to verify the result;
+* what context needs to carry into the next session.
 
-Instead, these decisions become part of the repository.
+For this project, that context is captured through structured, persistent instructions and project documentation.
 
 ```text
 Product
@@ -80,21 +110,23 @@ Evaluation
 Verified implementation
 ```
 
-The coding agent operates within this environment rather than reconstructing the entire project from a conversation every time.
+This gives the coding agent a defined context in which to work.
 
-The context the coding agent needs is captured in a set of explicit, persistent instructions:
+It doesn't have to reconstruct the entire project from a conversation or decide the whole development strategy from scratch.
+
+The instructions make explicit:
 
 **What are we building?**
 
 **What are we solving now?**
 
-**What is out of scope?**
+**What is explicitly out of scope?**
 
 **What does "done" look like?**
 
 **How do we verify it?**
 
-## From code generation to an engineering loop
+## From requirement to code
 
 The important shift is from:
 
@@ -116,7 +148,9 @@ Here is what success looks like.
 Here is how we verify it."
 ```
 
-The coding agent then becomes part of an engineering loop:
+This creates a clearer path from a product requirement to an implementation.
+
+The coding agent becomes part of an iterative engineering process:
 
 ```text
 Understand
@@ -132,47 +166,71 @@ Persist
 Continue
 ```
 
-Each iteration produces not just code, but a verified piece of the system and the context needed for the next iteration.
+Each iteration produces a verified piece of the system and preserves the context needed for the next iteration.
 
-## Applying the same principle to AI systems
+## The key learning
 
-There is another interesting layer when the application itself is an AI system.
+My biggest learning from this project was that this approach gave me a practical way to go from a product requirement to working code.
 
-The application also needs boundaries.
-
-For example, a customer-support agent should not answer every question simply because it can generate a plausible response.
-
-It needs to know when it has enough evidence to answer — and when it should stop and escalate.
-
-So the principle is applied at two levels:
+Instead of taking a large requirement and asking the coding agent to build the whole application, I could progressively translate it into:
 
 ```text
-                 Engineering Harness
-                         │
-                  controls what
-                  the coding agent builds
-                         │
-                         ▼
-                  AI Application
-                         │
-                  controls what
-                  the AI agent can do
+Requirement
+    ↓
+Problem
+    ↓
+Phase
+    ↓
+Scope & boundaries
+    ↓
+Acceptance criteria
+    ↓
+Evaluation
+    ↓
+Code
+    ↓
+Verified outcome
 ```
 
-The coding agent has bounded responsibilities.
+The files in this project are one way of capturing that context and structure. They don't have to be files — the same approach could be implemented using tools such as Jira or other product and engineering workflows.
 
-The AI application has bounded capabilities.
+The important part is the structure: creating a clear path from **what needs to be built** to **what the coding agent needs to implement and how we verify it**.
 
-Both are governed by explicit contracts and verification.
+That is what this project is exploring: **using problem decomposition, structured context and verification to create a repeatable path from requirements to code when working with AI coding agents.**
 
-## What this project is really exploring
+## Repository structure
 
-The customer-support agent is the application.
+The project keeps the product and engineering context separate from the implementation:
 
-The deeper experiment is whether we can use problem decomposition and harness engineering to build increasingly complex AI systems while keeping the development process understandable, verifiable, and resumable across coding-agent sessions.
+```text
+.
+├── AGENTS.md
+├── CLAUDE.md
+├── session-handoff.md
+│
+├── docs/
+│   ├── PRODUCT.md
+│   ├── ARCHITECTURE.md
+│   ├── RELIABILITY.md
+│   │
+│   └── phases/
+│       ├── PHASE-00.md
+│       ├── PHASE-00-FEATURES.json
+│       ├── PHASE-00-EVALS.json
+│       ├── ...
+│       ├── PHASE-08.md
+│       ├── PHASE-08-FEATURES.json
+│       └── PHASE-08-EVALS.json
+```
 
-Rather than expecting a single model interaction to produce the final system, the system emerges through a sequence of small, explicit, verified engineering decisions.
+The implementation is deliberately developed alongside this context rather than treating documentation as something added after the code is written.
+
+## Final thought
+
+The objective is to make the coding agent effective at solving complex problems by giving it the right level of context, structure and boundaries.
+
+Instead of expecting one model interaction to produce the final system, the system emerges through a sequence of **small, explicit and verified engineering decisions**.
 
 The model provides the intelligence.
 
-The harness provides the structure.
+**The structure provides the boundaries.**
