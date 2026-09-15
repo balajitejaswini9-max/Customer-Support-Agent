@@ -6,8 +6,7 @@ Before making changes:
 1. Read `AGENTS.md`.
 2. Read the relevant architecture/product/reliability documents.
 3. Read the active phase document.
-4. Run `bash init.sh`.
-5. Check `feature_list.json`.
+4. Check `feature_list.json`.
 
 Follow the active phase boundary strictly. Do not implement future-phase functionality.
 
