@@ -82,7 +82,7 @@ Verified implementation
 
 The coding agent operates within this environment rather than reconstructing the entire project from a conversation every time.
 
-The repository provides the context for:
+The context the coding agent needs is captured in a set of explicit, persistent instructions:
 
 **What are we building?**
 
@@ -90,9 +90,9 @@ The repository provides the context for:
 
 **What is out of scope?**
 
-**How do we know it works?**
+**What does "done" look like?**
 
-**Where do we continue from?**
+**How do we verify it?**
 
 ## From code generation to an engineering loop
 
