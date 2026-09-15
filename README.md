@@ -1,20 +1,16 @@
 # Building an AI Agent by Decomposing the Problem
 
-What happens when you give an AI coding agent a complex product requirement and simply ask it to **build the whole thing**?
+What happens when you give an AI coding agent a complex product requirement and ask it to build the whole thing?
 
 It can produce a lot of code.
 
-But how do you know it is solving the **right problem**, in the **right order**, with the **right boundaries**?
+But how do you know it is solving the right problem, in the right order, with the right boundaries?
 
 This project explores a different approach.
 
-## The idea
+## Start with the problem, not the code
 
-Start with the problem statement.
-
-Don't immediately turn it into code.
-
-First, **decompose the problem into smaller engineering problems**.
+Instead of turning the entire problem into one large prompt, I break it down into smaller engineering problems that can be implemented and verified independently.
 
 ```text
                 Problem Statement
@@ -29,10 +25,10 @@ First, **decompose the problem into smaller engineering problems**.
               Define boundaries
                        │
                        ▼
-             Define how to verify it
+             Define verification
                        │
                        ▼
-               Give it to the agent
+               Give it to agent
                        │
                        ▼
                   Implement
@@ -47,32 +43,24 @@ First, **decompose the problem into smaller engineering problems**.
                 Next problem
 ```
 
-The system is built incrementally from these smaller, verifiable problems.
-
-## Why this matters
-
-With AI coding agents, the limiting factor is increasingly not:
-
-> **"Can the model write the code?"**
-
-It is:
-
-> **"Can we give the model the right environment in which to make good engineering decisions?"**
-
-A large prompt leaves too much to the model:
-
-* what to build first;
-* what not to build;
-* where the boundaries are;
-* what "done" means;
-* how to verify the result;
-* what context should survive into the next session.
-
-Instead, these decisions become part of the **repository itself**.
+The application is built incrementally, with each step providing a verified foundation for the next.
 
 ## The repository becomes the harness
 
-The repository captures the context that the agent needs to work effectively:
+With AI coding agents, the challenge is increasingly less about whether the model can write code.
+
+The bigger challenge is giving it enough context and constraints to make good engineering decisions.
+
+A large prompt leaves many decisions to the model:
+
+* What should be built first?
+* What is out of scope?
+* Where are the boundaries?
+* What does "done" mean?
+* How should the result be verified?
+* What context needs to carry into the next session?
+
+Instead, these decisions become part of the repository.
 
 ```text
 Product
@@ -92,25 +80,23 @@ Evaluation
 Verified implementation
 ```
 
-The coding agent operates inside this environment.
+The coding agent operates within this environment rather than reconstructing the entire project from a conversation every time.
 
-It doesn't have to reconstruct the entire project from a conversation or decide the whole development strategy from scratch.
-
-The repository tells it:
+The repository provides the context for:
 
 **What are we building?**
 
 **What are we solving now?**
 
-**What is explicitly out of scope?**
+**What is out of scope?**
 
 **How do we know it works?**
 
 **Where do we continue from?**
 
-## The important shift
+## From code generation to an engineering loop
 
-The interesting change is from:
+The important shift is from:
 
 ```text
 "Build this application."
@@ -127,10 +113,10 @@ Here are the boundaries.
 
 Here is what success looks like.
 
-Here is how you prove it."
+Here is how we verify it."
 ```
 
-That makes the coding agent part of an **engineering loop**, rather than simply a code generator.
+The coding agent then becomes part of an engineering loop:
 
 ```text
 Understand
@@ -146,31 +132,31 @@ Persist
 Continue
 ```
 
-## Why this is particularly important for AI systems
+Each iteration produces not just code, but a verified piece of the system and the context needed for the next iteration.
 
-AI systems have another layer of complexity.
+## Applying the same principle to AI systems
 
-The application itself also needs boundaries.
+There is another interesting layer when the application itself is an AI system.
 
-For example, an agent should not simply answer every customer question because it can generate a plausible response.
+The application also needs boundaries.
 
-It needs to know:
+For example, a customer-support agent should not answer every question simply because it can generate a plausible response.
 
-> **When should I answer, and when should I not answer?**
+It needs to know when it has enough evidence to answer — and when it should stop and escalate.
 
-So the same principle is applied twice:
+So the principle is applied at two levels:
 
 ```text
                  Engineering Harness
                          │
                   controls what
-                  the agent builds
+                  the coding agent builds
                          │
                          ▼
                   AI Application
                          │
                   controls what
-                  the agent can do
+                  the AI agent can do
 ```
 
 The coding agent has bounded responsibilities.
@@ -183,12 +169,10 @@ Both are governed by explicit contracts and verification.
 
 The customer-support agent is the application.
 
-The deeper experiment is:
+The deeper experiment is whether we can use problem decomposition and harness engineering to build increasingly complex AI systems while keeping the development process understandable, verifiable, and resumable across coding-agent sessions.
 
-> **Can we use harness engineering and problem decomposition to build increasingly complex AI systems in a way that remains understandable, verifiable and resumable across coding-agent sessions?**
-
-Instead of expecting one model interaction to produce the final system, the system emerges through a sequence of **small, explicit, verified engineering decisions**.
+Rather than expecting a single model interaction to produce the final system, the system emerges through a sequence of small, explicit, verified engineering decisions.
 
 The model provides the intelligence.
 
-**The harness provides the structure.**
+The harness provides the structure.
