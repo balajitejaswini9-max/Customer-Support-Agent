@@ -1,0 +1,108 @@
+{
+  "phase": 4,
+  "name": "Return Eligibility",
+  "status": "done",
+  "features": [
+    {
+      "id": "P4-F001",
+      "name": "Return Policy Retrieval",
+      "status": "done",
+      "acceptance_criteria": [
+        "Return-policy evidence can be retrieved from the knowledge base.",
+        "Retrieved policy evidence includes source metadata.",
+        "The system does not invent undocumented return policy."
+      ]
+    },
+    {
+      "id": "P4-F002",
+      "name": "Eligibility Input Collection",
+      "status": "done",
+      "acceptance_criteria": [
+        "Eligibility evaluation can obtain required order facts from StoreClient.",
+        "Eligibility evaluation can obtain applicable policy evidence.",
+        "Missing required facts are explicitly detected."
+      ]
+    },
+    {
+      "id": "P4-F003",
+      "name": "Return Eligibility Rules",
+      "status": "done",
+      "acceptance_criteria": [
+        "Eligibility rules are based only on documented policy.",
+        "Rules are deterministic and inspectable.",
+        "No undocumented eligibility rules are introduced."
+      ]
+    },
+    {
+      "id": "P4-F004",
+      "name": "Check Return Eligibility Tool",
+      "status": "done",
+      "acceptance_criteria": [
+        "The agent can invoke check_return_eligibility.",
+        "The tool combines order facts with policy evidence.",
+        "The tool returns a structured eligibility decision."
+      ]
+    },
+    {
+      "id": "P4-F005",
+      "name": "Eligibility Explanation",
+      "status": "done",
+      "acceptance_criteria": [
+        "The customer receives a clear explanation of the eligibility decision.",
+        "The response cites relevant policy evidence.",
+        "The explanation is consistent with the underlying decision."
+      ]
+    },
+    {
+      "id": "P4-F006",
+      "name": "Insufficient Evidence Handling",
+      "status": "done",
+      "acceptance_criteria": [
+        "The system does not guess when required evidence is missing.",
+        "Insufficient evidence results in a safe response or escalation.",
+        "The response explains why eligibility could not be determined when appropriate."
+      ]
+    },
+    {
+      "id": "P4-F007",
+      "name": "Conflicting Policy Handling",
+      "status": "done",
+      "acceptance_criteria": [
+        "Materially conflicting policy evidence is detected.",
+        "The system does not arbitrarily choose between conflicting policies.",
+        "Conflicting policy evidence results in safe escalation."
+      ]
+    },
+    {
+      "id": "P4-F008",
+      "name": "Action Boundary Protection",
+      "status": "done",
+      "acceptance_criteria": [
+        "The system does not create a return.",
+        "The system does not issue or claim to issue a refund.",
+        "The system does not cancel an order.",
+        "Eligibility determination remains separate from operational actions."
+      ]
+    },
+    {
+      "id": "P4-F009",
+      "name": "Phase 1 and 3 Regression Coverage",
+      "status": "done",
+      "acceptance_criteria": [
+        "Phase 1 knowledge-grounded support remains functional.",
+        "Phase 3 order lookup remains functional.",
+        "Order information does not leak between customers or orders."
+      ]
+    },
+    {
+      "id": "P4-F010",
+      "name": "Phase 4 Behavioural Evaluation",
+      "status": "done",
+      "acceptance_criteria": [
+        "All Phase 4 evaluation cases execute successfully.",
+        "Positive, negative and safety-boundary cases are covered.",
+        "Evaluation results provide evidence that the feature behaves as specified."
+      ]
+    }
+  ]
+}

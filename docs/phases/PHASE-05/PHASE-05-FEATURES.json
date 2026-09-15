@@ -1,0 +1,94 @@
+{
+  "phase": 5,
+  "name": "Escalation and Human Handoff",
+  "status": "done",
+  "features": [
+    {
+      "id": "P5-F001",
+      "name": "Escalation Decision Integration",
+      "status": "done",
+      "acceptance_criteria": [
+        "Use existing safety boundaries to trigger escalation.",
+        "Do not unnecessarily escalate resolvable requests."
+      ]
+    },
+    {
+      "id": "P5-F002",
+      "name": "Handoff Summary Generation",
+      "status": "done",
+      "acceptance_criteria": [
+        "Summary is grounded in conversation and evidence.",
+        "Unknown facts remain unknown."
+      ]
+    },
+    {
+      "id": "P5-F003",
+      "name": "EscalationTicket Model",
+      "status": "done",
+      "acceptance_criteria": [
+        "Ticket has stable structured fields.",
+        "Reason, summary and evidence are preserved."
+      ]
+    },
+    {
+      "id": "P5-F004",
+      "name": "Escalation Repository",
+      "status": "done",
+      "acceptance_criteria": [
+        "Persistence is behind an interface.",
+        "SQLite supports create and retrieve."
+      ]
+    },
+    {
+      "id": "P5-F005",
+      "name": "Notification Service",
+      "status": "done",
+      "acceptance_criteria": [
+        "Notification is behind an interface.",
+        "Failure is not reported as success."
+      ]
+    },
+    {
+      "id": "P5-F006",
+      "name": "Customer Escalation Response",
+      "status": "done",
+      "acceptance_criteria": [
+        "Customer receives an accurate escalation response.",
+        "No claim of human resolution."
+      ]
+    },
+    {
+      "id": "P5-F007",
+      "name": "Duplicate Escalation Protection",
+      "status": "done",
+      "acceptance_criteria": [
+        "Repeated processing does not create uncontrolled duplicate tickets."
+      ]
+    },
+    {
+      "id": "P5-F008",
+      "name": "Evidence Preservation",
+      "status": "done",
+      "acceptance_criteria": [
+        "Relevant sources and known facts are preserved.",
+        "Unsupported facts are never added."
+      ]
+    },
+    {
+      "id": "P5-F009",
+      "name": "Phase 1-4 Regression Coverage",
+      "status": "done",
+      "acceptance_criteria": [
+        "Knowledge, order and eligibility behaviour remains intact."
+      ]
+    },
+    {
+      "id": "P5-F010",
+      "name": "Phase 5 Behavioural Evaluation",
+      "status": "done",
+      "acceptance_criteria": [
+        "All Phase 5 evaluations pass."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "phase": 7,
+  "name": "Observability and Metrics",
+  "evaluations": [
+    {
+      "id": "P7-E001",
+      "name": "Request ID",
+      "input": "Send a chat request.",
+      "expected_behaviour": [
+        "Processing is traceable by request ID."
+      ]
+    },
+    {
+      "id": "P7-E002",
+      "name": "Structured logging",
+      "input": "Process a grounded KB question.",
+      "expected_behaviour": [
+        "Structured request/stage logs exist."
+      ]
+    },
+    {
+      "id": "P7-E003",
+      "name": "Latency",
+      "input": "Process a retrieval request.",
+      "expected_behaviour": [
+        "Total and relevant stage latency are recorded."
+      ]
+    },
+    {
+      "id": "P7-E004",
+      "name": "Retrieval failure",
+      "input": "Make KB unavailable.",
+      "expected_behaviour": [
+        "Failure is observable; no fabricated answer."
+      ]
+    },
+    {
+      "id": "P7-E005",
+      "name": "Tool failure",
+      "input": "Make StoreClient fail.",
+      "expected_behaviour": [
+        "Failure is observable and handled safely."
+      ]
+    },
+    {
+      "id": "P7-E006",
+      "name": "Escalation metric",
+      "input": "Trigger escalation.",
+      "expected_behaviour": [
+        "Count/reason are recorded."
+      ]
+    },
+    {
+      "id": "P7-E007",
+      "name": "Error classification",
+      "input": "Trigger an application error.",
+      "expected_behaviour": [
+        "Error is classified and logged."
+      ]
+    },
+    {
+      "id": "P7-E008",
+      "name": "Health",
+      "input": "Call health endpoint.",
+      "expected_behaviour": [
+        "Process health is reported."
+      ]
+    },
+    {
+      "id": "P7-E009",
+      "name": "Readiness",
+      "input": "Disable a required dependency.",
+      "expected_behaviour": [
+        "Readiness reflects the defined state."
+      ]
+    },
+    {
+      "id": "P7-E010",
+      "name": "Metrics privacy",
+      "input": "Inspect telemetry after a request.",
+      "expected_behaviour": [
+        "Raw sensitive content is not unnecessarily exposed."
+      ]
+    },
+    {
+      "id": "P7-E011",
+      "name": "No behaviour change",
+      "input": "Ask payment methods.",
+      "expected_behaviour": [
+        "Customer-facing correctness is unchanged."
+      ]
+    },
+    {
+      "id": "P7-E012",
+      "name": "Escalation correctness",
+      "input": "Request unsupported action.",
+      "expected_behaviour": [
+        "Existing escalation rules still apply."
+      ]
+    }
+  ]
+}

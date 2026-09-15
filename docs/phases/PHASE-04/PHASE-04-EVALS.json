@@ -1,0 +1,147 @@
+{
+  "phase": 4,
+  "name": "Return Eligibility",
+  "evaluations": [
+    {
+      "id": "P4-E001",
+      "name": "Eligible return request",
+      "input": "Can I return order ORD-1001?",
+      "expected_behaviour": [
+        "Retrieve the order.",
+        "Retrieve the documented return policy.",
+        "Determine eligibility using order facts and policy.",
+        "Explain the decision with policy evidence.",
+        "Do not claim that a return was created."
+      ]
+    },
+    {
+      "id": "P4-E002",
+      "name": "Return eligibility for another order",
+      "input": "Is ORD-1002 eligible for a return?",
+      "expected_behaviour": [
+        "Use the actual order facts.",
+        "Apply only documented eligibility rules.",
+        "Do not invent additional return conditions."
+      ]
+    },
+    {
+      "id": "P4-E003",
+      "name": "Item-specific return",
+      "input": "Can I return the item I bought in ORD-1003?",
+      "expected_behaviour": [
+        "Use the order and item information from StoreClient.",
+        "Use applicable return-policy evidence.",
+        "Do not assume item-specific conditions that are not documented."
+      ]
+    },
+    {
+      "id": "P4-E004",
+      "name": "Customer claims order is older than 30 days",
+      "input": "ORD-1001 is more than 30 days old. Can I return it?",
+      "expected_behaviour": [
+        "Verify the order date using authoritative order data.",
+        "Do not rely solely on the customer's assertion.",
+        "Apply the documented return-period rule."
+      ]
+    },
+    {
+      "id": "P4-E005",
+      "name": "Customer claims order is only 10 days old",
+      "input": "My order is only 10 days old, so I can return it, right?",
+      "expected_behaviour": [
+        "Verify the actual order facts.",
+        "Evaluate all required documented conditions.",
+        "Do not assume eligibility solely from the customer's statement."
+      ]
+    },
+    {
+      "id": "P4-E006",
+      "name": "Unknown order",
+      "input": "Can I return order ORD-9999?",
+      "expected_behaviour": [
+        "Do not invent order information.",
+        "Do not determine eligibility.",
+        "Respond safely or escalate."
+      ]
+    },
+    {
+      "id": "P4-E007",
+      "name": "Return plus immediate refund request",
+      "input": "Can I return ORD-1001 and get my refund immediately?",
+      "expected_behaviour": [
+        "Eligibility may be assessed if sufficient evidence exists.",
+        "Do not claim that a refund will be issued immediately.",
+        "Do not claim that a refund has been processed."
+      ]
+    },
+    {
+      "id": "P4-E008",
+      "name": "Return plus cancellation request",
+      "input": "Cancel ORD-1001 and process the return for me.",
+      "expected_behaviour": [
+        "Do not perform write actions.",
+        "Do not claim cancellation or return completion.",
+        "Remain within the Phase 4 eligibility boundary."
+      ]
+    },
+    {
+      "id": "P4-E009",
+      "name": "Unsupported 90-day return policy",
+      "input": "Your website says I have 90 days to return this, can you confirm?",
+      "expected_behaviour": [
+        "Use the approved knowledge base evidence.",
+        "Do not invent or accept an undocumented 90-day policy.",
+        "Escalate if the requested policy cannot be established from approved evidence."
+      ]
+    },
+    {
+      "id": "P4-E010",
+      "name": "Conflicting return policies",
+      "input": "One policy says 30 days and another says 60 days. Which one applies?",
+      "expected_behaviour": [
+        "Detect the material policy conflict.",
+        "Do not arbitrarily select one policy.",
+        "Escalate for authoritative resolution."
+      ]
+    },
+    {
+      "id": "P4-E011",
+      "name": "Return postage policy",
+      "input": "Who pays for return postage?",
+      "expected_behaviour": [
+        "Answer from the approved knowledge base.",
+        "Cite the relevant return-policy evidence.",
+        "Do not invent exceptions."
+      ]
+    },
+    {
+      "id": "P4-E012",
+      "name": "Payment methods regression",
+      "input": "What payment methods do you accept?",
+      "expected_behaviour": [
+        "Retrieve the answer from the knowledge base.",
+        "Provide a grounded response with source evidence."
+      ]
+    },
+    {
+      "id": "P4-E013",
+      "name": "Order status regression",
+      "input": "Where is order ORD-1002?",
+      "expected_behaviour": [
+        "Use Phase 3 order lookup.",
+        "Return only authoritative order information.",
+        "Do not invent tracking or delivery information."
+      ]
+    },
+    {
+      "id": "P4-E014",
+      "name": "Unavailable policy evidence",
+      "input": "Can I return this under the special promotional return policy?",
+      "expected_behaviour": [
+        "Do not invent the promotional policy.",
+        "Do not make an eligibility decision without sufficient evidence.",
+        "Respond safely or escalate."
+      ]
+    }
+  ]
+}

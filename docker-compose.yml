@@ -7,10 +7,11 @@ services:
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
       - KB_DIR=knowledge_base
       - CHROMA_DIR=/data/chroma
+      - DATA_DIR=/data/db
       - CLAUDE_MODEL=${CLAUDE_MODEL:-claude-opus-4-8}
       - RETRIEVAL_THRESHOLD=${RETRIEVAL_THRESHOLD:-0.25}
     volumes:
-      - chroma_data:/data/chroma
+      - agent_data:/data
     restart: unless-stopped
 
   # Unit tests — no API key required
@@ -19,7 +20,13 @@ services:
     command: ["python", "-m", "pytest", "tests/test_ingestion.py", "tests/test_retrieval.py", "-v"]
     profiles: ["test"]
 
-  # Full behavioural eval — requires ANTHROPIC_API_KEY
+  # Phase 1 structural evals — no API key required
+  eval-p1-struct:
+    build: .
+    command: ["python", "-m", "pytest", "tests/eval_phase1.py", "-m", "not api and not live", "-v"]
+    profiles: ["eval-p1"]
+
+  # Phase 1 behavioural eval — requires ANTHROPIC_API_KEY
   eval:
     build: .
     command: ["python", "-m", "pytest", "tests/eval_phase1.py", "-v"]
@@ -27,7 +34,175 @@ services:
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
       - CLAUDE_MODEL=${CLAUDE_MODEL:-claude-opus-4-8}
       - RETRIEVAL_THRESHOLD=${RETRIEVAL_THRESHOLD:-0.25}
-    profiles: ["eval"]
+    profiles: ["eval", "eval-p1"]
+
+  # Phase 2 structural evals — no server required (HTML/CSS/JS checks only)
+  eval-p2-struct:
+    build: .
+    command: ["python", "-m", "pytest", "tests/eval_phase2.py", "-m", "not live", "-v"]
+    profiles: ["eval-p2"]
+
+  # Phase 2 live API evals — runs against the agent service
+  eval-p2-live:
+    build: .
+    command: ["python", "-m", "pytest", "tests/eval_phase2.py", "-v"]
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - BASE_URL=http://agent:8000
+      - CLAUDE_MODEL=${CLAUDE_MODEL:-claude-opus-4-8}
+      - RETRIEVAL_THRESHOLD=${RETRIEVAL_THRESHOLD:-0.25}
+    depends_on:
+      - agent
+    profiles: ["eval-p2"]
+
+  # Phase 3 structural evals — no server or API key required
+  eval-p3-struct:
+    build: .
+    command: ["python", "-m", "pytest", "tests/eval_phase3.py", "-m", "not api and not live", "-v"]
+    profiles: ["eval-p3"]
+
+  # Phase 3 agent behaviour evals — requires ANTHROPIC_API_KEY (no server)
+  eval-p3-agent:
+    build: .
+    command: ["python", "-m", "pytest", "tests/eval_phase3.py", "-m", "not live", "-v"]
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - CLAUDE_MODEL=${CLAUDE_MODEL:-claude-opus-4-8}
+      - RETRIEVAL_THRESHOLD=${RETRIEVAL_THRESHOLD:-0.25}
+    profiles: ["eval-p3"]
+
+  # Phase 3 live HTTP evals — runs against the agent service
+  eval-p3-live:
+    build: .
+    command: ["python", "-m", "pytest", "tests/eval_phase3.py", "-v"]
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - BASE_URL=http://agent:8000
+      - CLAUDE_MODEL=${CLAUDE_MODEL:-claude-opus-4-8}
+      - RETRIEVAL_THRESHOLD=${RETRIEVAL_THRESHOLD:-0.25}
+    depends_on:
+      - agent
+    profiles: ["eval-p3"]
+
+  # Phase 4 structural evals — no server or API key required
+  eval-p4-struct:
+    build: .
+    command: ["python", "-m", "pytest", "tests/eval_phase4.py", "-m", "not api and not live", "-v"]
+    profiles: ["eval-p4"]
+
+  # Phase 4 agent behaviour evals — requires ANTHROPIC_API_KEY (no server)
+  eval-p4-agent:
+    build: .
+    command: ["python", "-m", "pytest", "tests/eval_phase4.py", "-m", "not live", "-v"]
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - CLAUDE_MODEL=${CLAUDE_MODEL:-claude-opus-4-8}
+      - RETRIEVAL_THRESHOLD=${RETRIEVAL_THRESHOLD:-0.25}
+    profiles: ["eval-p4"]
+
+  # Phase 4 live HTTP evals — runs against the agent service
+  eval-p4-live:
+    build: .
+    command: ["python", "-m", "pytest", "tests/eval_phase4.py", "-v"]
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - BASE_URL=http://agent:8000
+      - CLAUDE_MODEL=${CLAUDE_MODEL:-claude-opus-4-8}
+      - RETRIEVAL_THRESHOLD=${RETRIEVAL_THRESHOLD:-0.25}
+    depends_on:
+      - agent
+    profiles: ["eval-p4"]
+
+  # Phase 5 structural evals — no server or API key required
+  eval-p5-struct:
+    build: .
+    command: ["python", "-m", "pytest", "tests/eval_phase5.py", "-m", "not api and not live", "-v"]
+    profiles: ["eval-p5"]
+
+  # Phase 5 agent behaviour evals — requires ANTHROPIC_API_KEY
+  eval-p5-agent:
+    build: .
+    command: ["python", "-m", "pytest", "tests/eval_phase5.py", "-m", "not live", "-v"]
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - CLAUDE_MODEL=${CLAUDE_MODEL:-claude-opus-4-8}
+      - RETRIEVAL_THRESHOLD=${RETRIEVAL_THRESHOLD:-0.25}
+    profiles: ["eval-p5"]
+
+  # Phase 5 live HTTP evals — runs against the agent service
+  eval-p5-live:
+    build: .
+    command: ["python", "-m", "pytest", "tests/eval_phase5.py", "-v"]
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - BASE_URL=http://agent:8000
+      - CLAUDE_MODEL=${CLAUDE_MODEL:-claude-opus-4-8}
+      - RETRIEVAL_THRESHOLD=${RETRIEVAL_THRESHOLD:-0.25}
+    depends_on:
+      - agent
+    profiles: ["eval-p5"]
+
+  # Phase 6 structural evals — no server or API key required
+  eval-p6-struct:
+    build: .
+    command: ["python", "-m", "pytest", "tests/eval_phase6.py", "-m", "not api and not live", "-v"]
+    profiles: ["eval-p6"]
+
+  # Phase 6 agent behaviour evals — requires ANTHROPIC_API_KEY
+  eval-p6-agent:
+    build: .
+    command: ["python", "-m", "pytest", "tests/eval_phase6.py", "-m", "not live", "-v"]
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - CLAUDE_MODEL=${CLAUDE_MODEL:-claude-opus-4-8}
+      - RETRIEVAL_THRESHOLD=${RETRIEVAL_THRESHOLD:-0.25}
+    profiles: ["eval-p6"]
+
+  # Phase 6 live HTTP evals — runs against the agent service
+  eval-p6-live:
+    build: .
+    command: ["python", "-m", "pytest", "tests/eval_phase6.py", "-v"]
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - BASE_URL=http://agent:8000
+      - CLAUDE_MODEL=${CLAUDE_MODEL:-claude-opus-4-8}
+      - RETRIEVAL_THRESHOLD=${RETRIEVAL_THRESHOLD:-0.25}
+    depends_on:
+      - agent
+    profiles: ["eval-p6"]
+
+  # Phase 7 structural evals — no server or API key required
+  eval-p7-struct:
+    build: .
+    command: ["python", "-m", "pytest", "tests/eval_phase7.py", "-m", "not live", "-v"]
+    profiles: ["eval-p7"]
+
+  # Phase 7 live HTTP evals — runs against the agent service
+  eval-p7-live:
+    build: .
+    command: ["python", "-m", "pytest", "tests/eval_phase7.py", "-v"]
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - BASE_URL=http://agent:8000
+    depends_on:
+      - agent
+    profiles: ["eval-p7"]
+
+  # Phase 8 structural evals and health checks — no API key required
+  eval-p8-struct:
+    build: .
+    command: ["python", "-m", "pytest", "tests/eval_phase8.py", "-v"]
+    profiles: ["eval-p8"]
+
+  # Phase 8 benchmark suite — requires ANTHROPIC_API_KEY
+  eval-p8-bench:
+    build: .
+    command: ["python", "-m", "pytest", "tests/benchmark.py", "-v", "-s"]
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - CLAUDE_MODEL=${CLAUDE_MODEL:-claude-opus-4-8}
+      - RETRIEVAL_THRESHOLD=${RETRIEVAL_THRESHOLD:-0.25}
+    profiles: ["eval-p8"]
 
 volumes:
-  chroma_data:
+  agent_data:

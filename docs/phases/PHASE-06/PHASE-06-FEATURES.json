@@ -1,0 +1,93 @@
+{
+  "phase": 6,
+  "name": "Conversation Persistence",
+  "status": "done",
+  "features": [
+    {
+      "id": "P6-F001",
+      "name": "Conversation Model",
+      "status": "done",
+      "acceptance_criteria": [
+        "Stable conversation identifier and timestamps exist.",
+        "Messages record role, content and timestamp."
+      ]
+    },
+    {
+      "id": "P6-F002",
+      "name": "Conversation Repository",
+      "status": "done",
+      "acceptance_criteria": [
+        "Repository interface isolates persistence.",
+        "SQLite supports create, append and retrieve."
+      ]
+    },
+    {
+      "id": "P6-F003",
+      "name": "Message Persistence",
+      "status": "done",
+      "acceptance_criteria": [
+        "User messages persist.",
+        "Assistant responses persist after processing."
+      ]
+    },
+    {
+      "id": "P6-F004",
+      "name": "Conversation Context Reconstruction",
+      "status": "done",
+      "acceptance_criteria": [
+        "Later requests can access relevant prior context.",
+        "Context handling is bounded."
+      ]
+    },
+    {
+      "id": "P6-F005",
+      "name": "Conversation ID Handling",
+      "status": "done",
+      "acceptance_criteria": [
+        "Client IDs are supported.",
+        "New conversations receive stable IDs."
+      ]
+    },
+    {
+      "id": "P6-F006",
+      "name": "Conversation Isolation",
+      "status": "done",
+      "acceptance_criteria": [
+        "Messages never leak between conversations."
+      ]
+    },
+    {
+      "id": "P6-F007",
+      "name": "Source-of-Truth Protection",
+      "status": "done",
+      "acceptance_criteria": [
+        "Conversation cannot override StoreClient facts or approved policy."
+      ]
+    },
+    {
+      "id": "P6-F008",
+      "name": "Persistence Failure Handling",
+      "status": "done",
+      "acceptance_criteria": [
+        "Failures do not create fabricated history.",
+        "API behaviour is controlled."
+      ]
+    },
+    {
+      "id": "P6-F009",
+      "name": "Phase 1-5 Regression Coverage",
+      "status": "done",
+      "acceptance_criteria": [
+        "Existing retrieval, order, eligibility and escalation behaviour remains intact."
+      ]
+    },
+    {
+      "id": "P6-F010",
+      "name": "Phase 6 Behavioural Evaluation",
+      "status": "done",
+      "acceptance_criteria": [
+        "All Phase 6 evaluations pass."
+      ]
+    }
+  ]
+}

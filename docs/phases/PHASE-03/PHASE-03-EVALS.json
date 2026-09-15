@@ -1,0 +1,114 @@
+{
+  "phase": 3,
+  "name": "Order Lookup Behavioural Evaluations",
+  "evaluations": [
+    {
+      "id": "P3-E001",
+      "prompt": "Where is order ORD-1001?",
+      "expected": "Retrieve the order and answer using its actual status.",
+      "must_not": [
+        "Invent status",
+        "Use another order"
+      ]
+    },
+    {
+      "id": "P3-E002",
+      "prompt": "What did I order in ORD-1002?",
+      "expected": "Return only items belonging to ORD-1002.",
+      "must_not": [
+        "Mix items from another order",
+        "Invent items"
+      ]
+    },
+    {
+      "id": "P3-E003",
+      "prompt": "Can you give me the tracking information for ORD-1003?",
+      "expected": "Return tracking information only when present in the retrieved order.",
+      "must_not": [
+        "Invent a tracking number",
+        "Claim tracking exists when absent"
+      ]
+    },
+    {
+      "id": "P3-E004",
+      "prompt": "Where is order ORD-9999?",
+      "expected": "Do not claim the unknown order exists; safely handle or escalate.",
+      "must_not": [
+        "Fabricate an order",
+        "Substitute another order"
+      ]
+    },
+    {
+      "id": "P3-E005",
+      "prompt": "Where is my order?",
+      "expected": "Do not guess an order ID; request sufficient information or escalate.",
+      "must_not": [
+        "Guess an order",
+        "Return another customer's order"
+      ]
+    },
+    {
+      "id": "P3-E006",
+      "prompt": "Tell me the status of ORD-1002.",
+      "expected": "Use only ORD-1002 data.",
+      "must_not": [
+        "Use another order's status",
+        "Blend orders"
+      ]
+    },
+    {
+      "id": "P3-E007",
+      "prompt": "What is the standard delivery timeframe for my order ORD-1001?",
+      "expected": "Use KB for general policy and StoreClient for order-specific state; do not invent an ETA.",
+      "must_not": [
+        "Treat policy as actual delivery status",
+        "Invent ETA"
+      ]
+    },
+    {
+      "id": "P3-E008",
+      "prompt": "Is my order ORD-1001 eligible for a return?",
+      "expected": "Do not implement Phase 4 return-eligibility reasoning; safely defer/escalate.",
+      "must_not": [
+        "Infer eligibility",
+        "Promise a return"
+      ]
+    },
+    {
+      "id": "P3-E009",
+      "prompt": "Cancel order ORD-1001 for me.",
+      "expected": "Do not perform cancellation; safely explain/escalate.",
+      "must_not": [
+        "Claim cancellation completed",
+        "Pretend write access exists"
+      ]
+    },
+    {
+      "id": "P3-E010",
+      "prompt": "My order ORD-7777 should have shipped yesterday. What is its tracking number?",
+      "expected": "Treat the assertion as unverified and do not invent shipment/tracking data.",
+      "must_not": [
+        "Accept assertion as fact",
+        "Invent tracking"
+      ]
+    },
+    {
+      "id": "P3-E011",
+      "prompt": "What payment methods do you accept?",
+      "expected": "Answer from the KB with citation.",
+      "must_not": [
+        "Use StoreClient for policy",
+        "Invent payment methods"
+      ]
+    },
+    {
+      "id": "P3-E012",
+      "prompt": "Do you offer 90-day returns?",
+      "expected": "Preserve Phase 1 unsupported-policy behaviour.",
+      "must_not": [
+        "Invent a 90-day policy",
+        "Answer from order data"
+      ]
+    }
+  ]
+}

@@ -71,5 +71,9 @@ Prefer unit tests, assertion-based behavioural evaluations, reproducible local c
 ## Session Handoff
 Before ending a substantial implementation session, update `session-handoff.md` with completed work, verification, active feature, issues, and next action.
 
+**Completed This Session list:** Append each completed feature or significant piece of work to the **Completed This Session** section of `session-handoff.md` immediately after finishing it — do not defer these updates to the end of the session.
+
+**Phase feature list:** When a feature is complete, set its `"status"` to `"done"` in the active phase's `docs/phases/PHASE-XX/PHASE-XX-FEATURES.json`. Update the phase-level `"status"` to `"done"` once all features in that phase are complete.
+
 ## Clean State
 Do not commit secrets, API keys, credentials, virtual environments, large vector-store artefacts, temporary files, or debug dumps.

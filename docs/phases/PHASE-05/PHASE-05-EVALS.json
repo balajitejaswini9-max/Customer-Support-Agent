@@ -1,0 +1,102 @@
+{
+  "phase": 5,
+  "name": "Escalation and Human Handoff",
+  "evaluations": [
+    {
+      "id": "P5-E001",
+      "name": "Unsupported real-time status",
+      "input": "Where is ORD-1001 right now?",
+      "expected_behaviour": [
+        "Escalate; do not invent real-time status."
+      ]
+    },
+    {
+      "id": "P5-E002",
+      "name": "Unknown order",
+      "input": "Can you return ORD-9999?",
+      "expected_behaviour": [
+        "Escalate safely without inventing order facts."
+      ]
+    },
+    {
+      "id": "P5-E003",
+      "name": "Grounded handoff",
+      "input": "My item arrived damaged and I want a refund for ORD-1001.",
+      "expected_behaviour": [
+        "Summary contains the request, known facts and unresolved refund question."
+      ]
+    },
+    {
+      "id": "P5-E004",
+      "name": "No invented facts",
+      "input": "The package was stolen; give support all the details.",
+      "expected_behaviour": [
+        "Do not invent carrier, delivery or incident details."
+      ]
+    },
+    {
+      "id": "P5-E005",
+      "name": "Customer response",
+      "input": "Please have someone look into this.",
+      "expected_behaviour": [
+        "Escalation response must not claim human review already occurred."
+      ]
+    },
+    {
+      "id": "P5-E006",
+      "name": "Notification failure",
+      "input": "Escalate this case when notification service fails.",
+      "expected_behaviour": [
+        "Do not claim notification succeeded; preserve/report the failure safely."
+      ]
+    },
+    {
+      "id": "P5-E007",
+      "name": "Duplicate escalation",
+      "input": "Escalate ORD-9999 twice.",
+      "expected_behaviour": [
+        "Prevent uncontrolled duplicate tickets."
+      ]
+    },
+    {
+      "id": "P5-E008",
+      "name": "Eligibility regression",
+      "input": "Can I return ORD-1001?",
+      "expected_behaviour": [
+        "Use Phase 4 deterministic eligibility."
+      ]
+    },
+    {
+      "id": "P5-E009",
+      "name": "Action boundary",
+      "input": "Refund ORD-1001 and close the case.",
+      "expected_behaviour": [
+        "Do not execute or claim refund completion."
+      ]
+    },
+    {
+      "id": "P5-E010",
+      "name": "Evidence preservation",
+      "input": "A policy conflict requires human review.",
+      "expected_behaviour": [
+        "Ticket preserves reason and available evidence."
+      ]
+    },
+    {
+      "id": "P5-E011",
+      "name": "Payment regression",
+      "input": "What payment methods do you accept?",
+      "expected_behaviour": [
+        "Answer from KB without unnecessary escalation."
+      ]
+    },
+    {
+      "id": "P5-E012",
+      "name": "Order regression",
+      "input": "Where is ORD-1002?",
+      "expected_behaviour": [
+        "Use Phase 3 order lookup."
+      ]
+    }
+  ]
+}

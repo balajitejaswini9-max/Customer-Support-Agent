@@ -1,0 +1,108 @@
+{
+  "phase": 3,
+  "name": "Order Lookup",
+  "status": "done",
+  "features": [
+    {
+      "id": "P3-F001",
+      "name": "StoreClient Interface",
+      "status": "done",
+      "acceptance_criteria": [
+        "StoreClient contract exists",
+        "Agent depends on the abstraction",
+        "Order lookup is supported by identifier"
+      ]
+    },
+    {
+      "id": "P3-F002",
+      "name": "Mock Store Implementation",
+      "status": "done",
+      "acceptance_criteria": [
+        "MockStoreClient implements StoreClient",
+        "Dataset is deterministic",
+        "Unknown orders return no order"
+      ]
+    },
+    {
+      "id": "P3-F003",
+      "name": "Mock Order Dataset",
+      "status": "done",
+      "acceptance_criteria": [
+        "Multiple distinct orders exist",
+        "Orders contain status and items",
+        "Shipment/tracking data exists where applicable",
+        "Data supports cross-order isolation tests"
+      ]
+    },
+    {
+      "id": "P3-F004",
+      "name": "Order Identifier Extraction",
+      "status": "done",
+      "acceptance_criteria": [
+        "Supported order IDs are extracted",
+        "Missing IDs are not guessed",
+        "Malformed IDs are handled safely"
+      ]
+    },
+    {
+      "id": "P3-F005",
+      "name": "Order Lookup Tool",
+      "status": "done",
+      "acceptance_criteria": [
+        "Agent can invoke lookup_order",
+        "Tool uses StoreClient",
+        "Tool returns structured order data"
+      ]
+    },
+    {
+      "id": "P3-F006",
+      "name": "Order-Grounded Response",
+      "status": "done",
+      "acceptance_criteria": [
+        "Response reflects retrieved data",
+        "Unsupported facts are not invented",
+        "Order-specific claims are grounded in lookup results"
+      ]
+    },
+    {
+      "id": "P3-F007",
+      "name": "Unknown Order Handling",
+      "status": "done",
+      "acceptance_criteria": [
+        "Unknown order is never fabricated",
+        "Another order is never substituted",
+        "Safe response/escalation occurs"
+      ]
+    },
+    {
+      "id": "P3-F008",
+      "name": "Capability Boundary Handling",
+      "status": "done",
+      "acceptance_criteria": [
+        "Return eligibility is not inferred",
+        "Refund/cancellation is not performed",
+        "Unsupported actions are safely handled"
+      ]
+    },
+    {
+      "id": "P3-F009",
+      "name": "Phase 1 Regression Coverage",
+      "status": "done",
+      "acceptance_criteria": [
+        "Phase 1 tests still pass",
+        "Policy questions use KB evidence",
+        "Order questions use StoreClient data"
+      ]
+    },
+    {
+      "id": "P3-F010",
+      "name": "Phase 3 Behavioural Evaluation",
+      "status": "done",
+      "acceptance_criteria": [
+        "All Phase 3 evaluations pass",
+        "Safety cases demonstrate non-fabrication",
+        "Results are recorded"
+      ]
+    }
+  ]
+}

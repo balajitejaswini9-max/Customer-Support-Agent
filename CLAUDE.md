@@ -14,3 +14,7 @@ Follow the active phase boundary strictly. Do not implement future-phase functio
 Use tests and behavioural evaluations as the definition of observable correctness.
 
 When completing work, update feature evidence and `session-handoff.md`.
+
+After completing each feature or significant piece of work, immediately append it to the **Completed This Session** list in `session-handoff.md`. Do not batch these updates to the end of the session — update the list as each item is finished.
+
+When a feature is done, mark its `"status"` as `"done"` in the corresponding `docs/phases/PHASE-XX/PHASE-XX-FEATURES.json` file. Also update the phase-level `"status"` field (`"active"` while in progress, `"done"` when all features are complete).

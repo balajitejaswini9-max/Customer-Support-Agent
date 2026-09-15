@@ -1,0 +1,104 @@
+{
+  "phase": 8,
+  "name": "Benchmarking and Repository Health",
+  "status": "done",
+  "features": [
+    {
+      "id": "P8-F001",
+      "name": "End-to-End Benchmark Suite",
+      "status": "done",
+      "acceptance_criteria": [
+        "Representative journeys run end to end.",
+        "Results include outcome and latency."
+      ]
+    },
+    {
+      "id": "P8-F002",
+      "name": "Evaluation Result Reporting",
+      "status": "done",
+      "acceptance_criteria": [
+        "Phase evaluations run consistently.",
+        "Results are recorded in a structured report."
+      ]
+    },
+    {
+      "id": "P8-F003",
+      "name": "Performance Baseline",
+      "status": "done",
+      "acceptance_criteria": [
+        "Baseline latency is measured.",
+        "Measurement method is documented."
+      ]
+    },
+    {
+      "id": "P8-F004",
+      "name": "Clean-State Reset",
+      "status": "done",
+      "acceptance_criteria": [
+        "Runtime state can be reset safely.",
+        "Source-controlled files are preserved."
+      ]
+    },
+    {
+      "id": "P8-F005",
+      "name": "Generated-State Cleanup",
+      "status": "done",
+      "acceptance_criteria": [
+        "Generated artifacts can be cleaned.",
+        "Leftovers can be detected."
+      ]
+    },
+    {
+      "id": "P8-F006",
+      "name": "Repository Health Check",
+      "status": "done",
+      "acceptance_criteria": [
+        "Required docs and phase ledgers exist.",
+        "Expected repository structure is present."
+      ]
+    },
+    {
+      "id": "P8-F007",
+      "name": "Ledger Consistency Check",
+      "status": "done",
+      "acceptance_criteria": [
+        "IDs are unique within phases.",
+        "Statuses and evidence are consistent."
+      ]
+    },
+    {
+      "id": "P8-F008",
+      "name": "Deterministic Initialization",
+      "status": "done",
+      "acceptance_criteria": [
+        "init.sh works from clean state.",
+        "No hidden conversational context is required."
+      ]
+    },
+    {
+      "id": "P8-F009",
+      "name": "Final Smoke Test",
+      "status": "done",
+      "acceptance_criteria": [
+        "Core support, order, eligibility and escalation journeys pass."
+      ]
+    },
+    {
+      "id": "P8-F010",
+      "name": "Harness Handoff Readiness",
+      "status": "done",
+      "acceptance_criteria": [
+        "A fresh coding-agent session can identify project state from repository files."
+      ]
+    },
+    {
+      "id": "P8-F011",
+      "name": "Final Repository Verification",
+      "status": "done",
+      "acceptance_criteria": [
+        "All Phase 8 evaluations pass.",
+        "Repository is left clean and understandable."
+      ]
+    }
+  ]
+}

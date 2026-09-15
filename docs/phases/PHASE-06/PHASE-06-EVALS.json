@@ -1,0 +1,102 @@
+{
+  "phase": 6,
+  "name": "Conversation Persistence",
+  "evaluations": [
+    {
+      "id": "P6-E001",
+      "name": "Multi-turn order context",
+      "input": "Turn 1: My order is ORD-1002. Turn 2: Where is it?",
+      "expected_behaviour": [
+        "Use prior order reference, then retrieve authoritative order facts."
+      ]
+    },
+    {
+      "id": "P6-E002",
+      "name": "Conversation continuity",
+      "input": "Turn 1 asks about returns. Turn 2 asks whether it applies to my order.",
+      "expected_behaviour": [
+        "Use relevant prior context without inventing order facts."
+      ]
+    },
+    {
+      "id": "P6-E003",
+      "name": "Conversation isolation",
+      "input": "Conversation A references ORD-1001; B asks about my order.",
+      "expected_behaviour": [
+        "B must not inherit A's order."
+      ]
+    },
+    {
+      "id": "P6-E004",
+      "name": "Unknown conversation",
+      "input": "Use a nonexistent conversation_id.",
+      "expected_behaviour": [
+        "Handle safely; do not invent history."
+      ]
+    },
+    {
+      "id": "P6-E005",
+      "name": "Persistence restart",
+      "input": "Create messages, restart application, continue conversation.",
+      "expected_behaviour": [
+        "Stored conversation can be reconstructed."
+      ]
+    },
+    {
+      "id": "P6-E006",
+      "name": "Policy authority",
+      "input": "Conversation says 90 days; KB says 30 days.",
+      "expected_behaviour": [
+        "KB remains authoritative."
+      ]
+    },
+    {
+      "id": "P6-E007",
+      "name": "Order authority",
+      "input": "Conversation says delivered; StoreClient says processing.",
+      "expected_behaviour": [
+        "StoreClient remains authoritative."
+      ]
+    },
+    {
+      "id": "P6-E008",
+      "name": "Assistant persistence",
+      "input": "Ask a grounded question.",
+      "expected_behaviour": [
+        "Assistant response is persisted."
+      ]
+    },
+    {
+      "id": "P6-E009",
+      "name": "Persistence failure",
+      "input": "Database is unavailable.",
+      "expected_behaviour": [
+        "No fabricated success/history; controlled failure."
+      ]
+    },
+    {
+      "id": "P6-E010",
+      "name": "Long conversation",
+      "input": "Provide many prior turns.",
+      "expected_behaviour": [
+        "Use bounded relevant context."
+      ]
+    },
+    {
+      "id": "P6-E011",
+      "name": "Escalation continuity",
+      "input": "Continue a previously escalated conversation.",
+      "expected_behaviour": [
+        "Preserve context without claiming human resolution."
+      ]
+    },
+    {
+      "id": "P6-E012",
+      "name": "Regression",
+      "input": "What payment methods do you accept?",
+      "expected_behaviour": [
+        "Phase 1 behaviour remains correct."
+      ]
+    }
+  ]
+}

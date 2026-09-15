@@ -1,0 +1,104 @@
+{
+  "phase": 7,
+  "name": "Observability and Metrics",
+  "status": "done",
+  "features": [
+    {
+      "id": "P7-F001",
+      "name": "Request Correlation",
+      "status": "done",
+      "acceptance_criteria": [
+        "Every request has a traceable request ID.",
+        "Related logs include it."
+      ]
+    },
+    {
+      "id": "P7-F002",
+      "name": "Structured Agent Logging",
+      "status": "done",
+      "acceptance_criteria": [
+        "Logs use structured fields.",
+        "Major agent stages emit useful events."
+      ]
+    },
+    {
+      "id": "P7-F003",
+      "name": "Latency Measurement",
+      "status": "done",
+      "acceptance_criteria": [
+        "Request latency is measured.",
+        "Expensive stages can be identified."
+      ]
+    },
+    {
+      "id": "P7-F004",
+      "name": "Retrieval Metrics",
+      "status": "done",
+      "acceptance_criteria": [
+        "Retrieval calls/outcomes are measurable.",
+        "Failure differs from empty results."
+      ]
+    },
+    {
+      "id": "P7-F005",
+      "name": "Tool Metrics",
+      "status": "done",
+      "acceptance_criteria": [
+        "StoreClient and eligibility calls are measurable.",
+        "Success/failure is recorded."
+      ]
+    },
+    {
+      "id": "P7-F006",
+      "name": "Escalation Metrics",
+      "status": "done",
+      "acceptance_criteria": [
+        "Escalation count and reason are measurable."
+      ]
+    },
+    {
+      "id": "P7-F007",
+      "name": "Error Metrics",
+      "status": "done",
+      "acceptance_criteria": [
+        "Errors are classified consistently.",
+        "Operational errors are not silent."
+      ]
+    },
+    {
+      "id": "P7-F008",
+      "name": "Health and Readiness",
+      "status": "done",
+      "acceptance_criteria": [
+        "Health reports process health.",
+        "Readiness follows the defined dependency contract."
+      ]
+    },
+    {
+      "id": "P7-F009",
+      "name": "Metrics API",
+      "status": "done",
+      "acceptance_criteria": [
+        "Minimal aggregate metrics are exposed.",
+        "Raw customer conversation content is not exposed."
+      ]
+    },
+    {
+      "id": "P7-F010",
+      "name": "Telemetry Safety and Regression",
+      "status": "done",
+      "acceptance_criteria": [
+        "Sensitive content is minimised/redacted.",
+        "Phase 1-6 behaviour remains unchanged."
+      ]
+    },
+    {
+      "id": "P7-F011",
+      "name": "Phase 7 Behavioural Evaluation",
+      "status": "done",
+      "acceptance_criteria": [
+        "All observability evaluations pass."
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
-  "current_phase": 1,
-  "phase_source": "docs/phases/PHASE-01/PHASE-01.md",
+  "current_phase": 8,
+  "phase_source": "docs/phases/PHASE-08/PHASE-08.md",
   "features": [
     {
       "id": "P0-F001",
@@ -122,6 +122,558 @@
       "status": "done",
       "evals": ["10 cases execute", "4 grounded answers pass", "6 escalation cases escalate", "assertion-based results are deterministic"],
       "evidence": ["docs/phases/PHASE-01/PHASE-01-EVALS.json", "tests/eval_phase1.py"]
+    },
+    {
+      "id": "P2-F001",
+      "phase": 2,
+      "name": "Chat Interface",
+      "status": "done",
+      "evals": ["test_p2_e001_form_and_input_exist", "test_p2_e002_empty_message_guard"],
+      "evidence": ["frontend/index.html", "frontend/app.js", "tests/eval_phase2.py"]
+    },
+    {
+      "id": "P2-F002",
+      "phase": 2,
+      "name": "Chat API Integration",
+      "status": "done",
+      "evals": ["test_p2_e001_api_accepts_valid_message", "test_p2_e003_grounded_answer_contract", "test_p2_e005_error_handling_in_js"],
+      "evidence": ["frontend/app.js", "src/api/__init__.py", "tests/eval_phase2.py"]
+    },
+    {
+      "id": "P2-F003",
+      "phase": 2,
+      "name": "Source Citation Display",
+      "status": "done",
+      "evals": ["test_p2_e006_sources_rendered", "test_p2_e006_sources_contract"],
+      "evidence": ["frontend/app.js", "frontend/style.css", "tests/eval_phase2.py"]
+    },
+    {
+      "id": "P2-F004",
+      "phase": 2,
+      "name": "Escalation Presentation",
+      "status": "done",
+      "evals": ["test_p2_e007_escalation_rendered", "test_p2_e008_no_fabricated_escalation_actions"],
+      "evidence": ["frontend/app.js", "frontend/style.css", "tests/eval_phase2.py"]
+    },
+    {
+      "id": "P2-F005",
+      "phase": 2,
+      "name": "Loading and Submission State",
+      "status": "done",
+      "evals": ["test_p2_e004_loading_state_transitions", "test_p2_e009_duplicate_submission_guard"],
+      "evidence": ["frontend/app.js", "tests/eval_phase2.py"]
+    },
+    {
+      "id": "P2-F006",
+      "phase": 2,
+      "name": "API Error Handling",
+      "status": "done",
+      "evals": ["test_p2_e005_error_handling_in_js", "test_p2_e010_input_re_enabled_after_error"],
+      "evidence": ["frontend/app.js", "tests/eval_phase2.py"]
+    },
+    {
+      "id": "P2-F007",
+      "phase": 2,
+      "name": "Responsive and Accessible UI",
+      "status": "done",
+      "evals": ["test_p2_e011_responsive_media_query", "test_p2_e012_label_exists", "test_p2_e012_enter_key_submission", "test_p2_e012_focus_managed"],
+      "evidence": ["frontend/style.css", "frontend/index.html", "frontend/app.js", "tests/eval_phase2.py"]
+    },
+    {
+      "id": "P3-F001",
+      "phase": 3,
+      "name": "StoreClient Interface",
+      "status": "done",
+      "evals": ["test_p3_s013_store_client_protocol_compliance"],
+      "evidence": ["src/store/__init__.py"]
+    },
+    {
+      "id": "P3-F002",
+      "phase": 3,
+      "name": "Mock Store Implementation",
+      "status": "done",
+      "evals": ["test_p3_s001_known_order_returned", "test_p3_s002_unknown_order_returns_none", "test_p3_s003_get_order_case_insensitive"],
+      "evidence": ["src/store/mock_store.py"]
+    },
+    {
+      "id": "P3-F003",
+      "phase": 3,
+      "name": "Mock Order Dataset",
+      "status": "done",
+      "evals": ["test_p3_s004_multiple_distinct_orders", "test_p3_s005_cross_order_item_isolation", "test_p3_s006_orders_have_required_fields", "test_p3_s014_dataset_has_at_least_four_orders"],
+      "evidence": ["src/store/mock_store.py"]
+    },
+    {
+      "id": "P3-F004",
+      "phase": 3,
+      "name": "Order Identifier Extraction",
+      "status": "done",
+      "evals": ["test_p3_s009_order_id_extracted", "test_p3_s010_no_order_id_returns_none", "test_p3_s011_plain_digits_not_extracted", "test_p3_s012_order_id_case_insensitive"],
+      "evidence": ["src/store/order_extractor.py"]
+    },
+    {
+      "id": "P3-F005",
+      "phase": 3,
+      "name": "Order Lookup Tool",
+      "status": "done",
+      "evals": ["test_p3_e001_known_order_answered", "test_p3_e004_unknown_order_escalated"],
+      "evidence": ["src/agent/__init__.py", "src/store/__init__.py"]
+    },
+    {
+      "id": "P3-F006",
+      "phase": 3,
+      "name": "Order-Grounded Response",
+      "status": "done",
+      "evals": ["test_p3_e001_known_order_answered", "test_p3_e002_order_items_from_correct_order", "test_p3_e003_tracking_returned_when_present", "test_p3_e006_correct_order_status"],
+      "evidence": ["src/generation/__init__.py", "src/agent/__init__.py"]
+    },
+    {
+      "id": "P3-F007",
+      "phase": 3,
+      "name": "Unknown Order Handling",
+      "status": "done",
+      "evals": ["test_p3_e004_unknown_order_escalated", "test_p3_e010_customer_assertion_not_trusted"],
+      "evidence": ["src/agent/__init__.py"]
+    },
+    {
+      "id": "P3-F008",
+      "phase": 3,
+      "name": "Capability Boundary Handling",
+      "status": "done",
+      "evals": ["test_p3_e008_return_eligibility_escalated", "test_p3_e009_cancellation_not_performed"],
+      "evidence": ["src/generation/__init__.py"]
+    },
+    {
+      "id": "P3-F009",
+      "phase": 3,
+      "name": "Phase 1 Regression Coverage",
+      "status": "done",
+      "evals": ["test_p3_e011_policy_from_kb", "test_p3_e012_no_90_day_policy_fabricated"],
+      "evidence": ["src/agent/__init__.py", "tests/eval_phase3.py"]
+    },
+    {
+      "id": "P3-F010",
+      "phase": 3,
+      "name": "Phase 3 Behavioural Evaluation",
+      "status": "done",
+      "evals": ["tests/eval_phase3.py (14 structural tests pass; 12 agent behavioural tests require API key)"],
+      "evidence": ["tests/eval_phase3.py", "docs/phases/PHASE-03/PHASE-03-EVALS.json"]
+    },
+    {
+      "id": "P4-F001",
+      "phase": 4,
+      "name": "Return Policy Retrieval",
+      "status": "done",
+      "evals": ["test_p4_s013_policy_sources_in_eligible_result", "test_p4_e011_return_postage_answered"],
+      "evidence": ["src/eligibility.py", "knowledge_base/return_policy.txt"]
+    },
+    {
+      "id": "P4-F002",
+      "phase": 4,
+      "name": "Eligibility Input Collection",
+      "status": "done",
+      "evals": ["test_p4_s016_ord_1002_insufficient_evidence", "test_p4_s012_eligibility_uses_store_data_not_customer_claim"],
+      "evidence": ["src/eligibility.py", "src/agent/__init__.py"]
+    },
+    {
+      "id": "P4-F003",
+      "phase": 4,
+      "name": "Return Eligibility Rules",
+      "status": "done",
+      "evals": ["test_p4_s002_eligible_within_window", "test_p4_s003_not_eligible_outside_window", "test_p4_s004_cancelled_order_not_eligible"],
+      "evidence": ["src/eligibility.py"]
+    },
+    {
+      "id": "P4-F004",
+      "phase": 4,
+      "name": "Check Return Eligibility Tool",
+      "status": "done",
+      "evals": ["test_p4_s001_eligibility_result_has_required_fields", "test_p4_s014_ord_1001_eligible_today", "test_p4_e001_eligible_return_answered"],
+      "evidence": ["src/eligibility.py", "src/agent/__init__.py"]
+    },
+    {
+      "id": "P4-F005",
+      "phase": 4,
+      "name": "Eligibility Explanation",
+      "status": "done",
+      "evals": ["test_p4_e001_eligible_return_answered", "test_p4_e003_item_specific_return"],
+      "evidence": ["src/generation/__init__.py"]
+    },
+    {
+      "id": "P4-F006",
+      "phase": 4,
+      "name": "Insufficient Evidence Handling",
+      "status": "done",
+      "evals": ["test_p4_s005_processing_no_delivery_escalates", "test_p4_s006_no_policy_chunks_escalates", "test_p4_e002_eligibility_for_ord_1002"],
+      "evidence": ["src/eligibility.py"]
+    },
+    {
+      "id": "P4-F007",
+      "phase": 4,
+      "name": "Conflicting Policy Handling",
+      "status": "done",
+      "evals": ["test_p4_s007_conflict_detection_triggers", "test_p4_s008_no_conflict_single_window", "test_p4_s009_conflict_escalates"],
+      "evidence": ["src/eligibility.py"]
+    },
+    {
+      "id": "P4-F008",
+      "phase": 4,
+      "name": "Action Boundary Protection",
+      "status": "done",
+      "evals": ["test_p4_e007_no_refund_claim", "test_p4_e008_no_action_performed"],
+      "evidence": ["src/generation/__init__.py"]
+    },
+    {
+      "id": "P4-F009",
+      "phase": 4,
+      "name": "Phase 1 and 3 Regression Coverage",
+      "status": "done",
+      "evals": ["test_p4_e012_payment_methods_regression", "test_p4_e013_order_status_regression"],
+      "evidence": ["src/agent/__init__.py", "tests/eval_phase4.py"]
+    },
+    {
+      "id": "P4-F010",
+      "phase": 4,
+      "name": "Phase 4 Behavioural Evaluation",
+      "status": "done",
+      "evals": ["tests/eval_phase4.py (16 structural tests; 13 agent behaviour tests; 3 live HTTP tests)"],
+      "evidence": ["tests/eval_phase4.py", "docs/phases/PHASE-04/PHASE-04-EVALS.json"]
+    },
+    {
+      "id": "P5-F001",
+      "phase": 5,
+      "name": "Escalation Decision Integration",
+      "status": "done",
+      "evals": ["test_p5_e005_resolvable_request_not_escalated"],
+      "evidence": ["src/agent/__init__.py"]
+    },
+    {
+      "id": "P5-F002",
+      "phase": 5,
+      "name": "Handoff Summary Generation",
+      "status": "done",
+      "evals": ["test_p5_s008_summary_without_client", "test_p5_e002_ticket_has_grounded_summary"],
+      "evidence": ["src/handoff/summary.py"]
+    },
+    {
+      "id": "P5-F003",
+      "phase": 5,
+      "name": "EscalationTicket Model",
+      "status": "done",
+      "evals": ["test_p5_s001_escalation_ticket_model"],
+      "evidence": ["src/handoff/models.py"]
+    },
+    {
+      "id": "P5-F004",
+      "phase": 5,
+      "name": "Escalation Repository",
+      "status": "done",
+      "evals": ["test_p5_s002_sqlite_repository_save_and_retrieve", "test_p5_s010_repository_is_protocol"],
+      "evidence": ["src/handoff/repository.py"]
+    },
+    {
+      "id": "P5-F005",
+      "phase": 5,
+      "name": "Notification Service",
+      "status": "done",
+      "evals": ["test_p5_s006_notification_service_protocol", "test_p5_s007_mock_notification_returns_true"],
+      "evidence": ["src/handoff/notification.py"]
+    },
+    {
+      "id": "P5-F006",
+      "phase": 5,
+      "name": "Customer Escalation Response",
+      "status": "done",
+      "evals": ["test_p5_e004_customer_response_no_human_claim"],
+      "evidence": ["src/agent/__init__.py"]
+    },
+    {
+      "id": "P5-F007",
+      "phase": 5,
+      "name": "Duplicate Escalation Protection",
+      "status": "done",
+      "evals": ["test_p5_s005_duplicate_ticket_not_inserted", "test_p5_e003_duplicate_escalation_not_created"],
+      "evidence": ["src/agent/__init__.py", "src/handoff/repository.py"]
+    },
+    {
+      "id": "P5-F008",
+      "phase": 5,
+      "name": "Evidence Preservation",
+      "status": "done",
+      "evals": ["test_p5_s009_evidence_preserved_in_ticket"],
+      "evidence": ["src/handoff/models.py", "src/agent/__init__.py"]
+    },
+    {
+      "id": "P5-F009",
+      "phase": 5,
+      "name": "Phase 1-4 Regression Coverage",
+      "status": "done",
+      "evals": ["test_p5_e005_resolvable_request_not_escalated"],
+      "evidence": ["tests/eval_phase5.py"]
+    },
+    {
+      "id": "P5-F010",
+      "phase": 5,
+      "name": "Phase 5 Behavioural Evaluation",
+      "status": "done",
+      "evals": ["tests/eval_phase5.py (10 structural, 5 agent behaviour, 1 live)"],
+      "evidence": ["tests/eval_phase5.py"]
+    },
+    {
+      "id": "P6-F001",
+      "phase": 6,
+      "name": "Conversation Model",
+      "status": "done",
+      "evals": ["test_p6_s001_message_model_fields", "test_p6_s002_conversation_model_fields"],
+      "evidence": ["src/conversation/models.py"]
+    },
+    {
+      "id": "P6-F002",
+      "phase": 6,
+      "name": "Conversation Repository",
+      "status": "done",
+      "evals": ["test_p6_s003_repository_get_or_create_new", "test_p6_s010_repo_is_protocol"],
+      "evidence": ["src/conversation/repository.py"]
+    },
+    {
+      "id": "P6-F003",
+      "phase": 6,
+      "name": "Message Persistence",
+      "status": "done",
+      "evals": ["test_p6_s005_append_and_retrieve_messages", "test_p6_e001_messages_persisted"],
+      "evidence": ["src/conversation/repository.py", "src/agent/__init__.py"]
+    },
+    {
+      "id": "P6-F004",
+      "phase": 6,
+      "name": "Conversation Context Reconstruction",
+      "status": "done",
+      "evals": ["test_p6_s008_get_messages_limit_respected", "test_p6_s009_messages_in_chronological_order"],
+      "evidence": ["src/conversation/repository.py", "src/agent/__init__.py", "src/generation/__init__.py"]
+    },
+    {
+      "id": "P6-F005",
+      "phase": 6,
+      "name": "Conversation ID Handling",
+      "status": "done",
+      "evals": ["test_p6_s003_repository_get_or_create_new", "test_p6_s004_repository_get_or_create_idempotent"],
+      "evidence": ["src/conversation/repository.py"]
+    },
+    {
+      "id": "P6-F006",
+      "phase": 6,
+      "name": "Conversation Isolation",
+      "status": "done",
+      "evals": ["test_p6_s006_conversation_isolation", "test_p6_e002_conversation_isolation_between_convs"],
+      "evidence": ["src/conversation/repository.py"]
+    },
+    {
+      "id": "P6-F007",
+      "phase": 6,
+      "name": "Source-of-Truth Protection",
+      "status": "done",
+      "evals": ["test_p6_e003_source_of_truth_not_overridden"],
+      "evidence": ["src/agent/__init__.py"]
+    },
+    {
+      "id": "P6-F008",
+      "phase": 6,
+      "name": "Persistence Failure Handling",
+      "status": "done",
+      "evals": ["test_p6_s007_get_messages_returns_empty_for_unknown"],
+      "evidence": ["src/conversation/repository.py"]
+    },
+    {
+      "id": "P6-F009",
+      "phase": 6,
+      "name": "Phase 1-5 Regression Coverage",
+      "status": "done",
+      "evals": ["test_p6_live_conversation_id_accepted"],
+      "evidence": ["tests/eval_phase6.py"]
+    },
+    {
+      "id": "P6-F010",
+      "phase": 6,
+      "name": "Phase 6 Behavioural Evaluation",
+      "status": "done",
+      "evals": ["tests/eval_phase6.py (10 structural, 3 agent behaviour, 1 live)"],
+      "evidence": ["tests/eval_phase6.py"]
+    },
+    {
+      "id": "P7-F001",
+      "phase": 7,
+      "name": "Request Correlation",
+      "status": "done",
+      "evals": ["test_p7_s008_module_level_singleton"],
+      "evidence": ["src/agent/__init__.py", "src/logging_config.py"]
+    },
+    {
+      "id": "P7-F002",
+      "phase": 7,
+      "name": "Structured Agent Logging",
+      "status": "done",
+      "evals": [],
+      "evidence": ["src/agent/__init__.py", "src/logging_config.py"]
+    },
+    {
+      "id": "P7-F003",
+      "phase": 7,
+      "name": "Latency Measurement",
+      "status": "done",
+      "evals": ["test_p7_s004_latency_avg"],
+      "evidence": ["src/metrics.py", "src/agent/__init__.py"]
+    },
+    {
+      "id": "P7-F004",
+      "phase": 7,
+      "name": "Retrieval Metrics",
+      "status": "done",
+      "evals": ["test_p7_s005_retrieval_metrics"],
+      "evidence": ["src/metrics.py", "src/agent/__init__.py"]
+    },
+    {
+      "id": "P7-F005",
+      "phase": 7,
+      "name": "Tool Metrics",
+      "status": "done",
+      "evals": ["test_p7_s006_tool_call_metrics"],
+      "evidence": ["src/metrics.py", "src/agent/__init__.py"]
+    },
+    {
+      "id": "P7-F006",
+      "phase": 7,
+      "name": "Escalation Metrics",
+      "status": "done",
+      "evals": ["test_p7_s003_record_escalation"],
+      "evidence": ["src/metrics.py", "src/agent/__init__.py"]
+    },
+    {
+      "id": "P7-F007",
+      "phase": 7,
+      "name": "Error Metrics",
+      "status": "done",
+      "evals": ["test_p7_s007_error_metrics"],
+      "evidence": ["src/metrics.py"]
+    },
+    {
+      "id": "P7-F008",
+      "phase": 7,
+      "name": "Health and Readiness",
+      "status": "done",
+      "evals": ["test_p7_live_health_endpoint", "test_p7_live_ready_endpoint"],
+      "evidence": ["src/api/__init__.py"]
+    },
+    {
+      "id": "P7-F009",
+      "phase": 7,
+      "name": "Metrics API",
+      "status": "done",
+      "evals": ["test_p7_live_metrics_endpoint"],
+      "evidence": ["src/api/__init__.py", "src/metrics.py"]
+    },
+    {
+      "id": "P7-F010",
+      "phase": 7,
+      "name": "Telemetry Safety and Regression",
+      "status": "done",
+      "evals": ["test_p7_s010_no_customer_content_in_metrics"],
+      "evidence": ["src/metrics.py"]
+    },
+    {
+      "id": "P7-F011",
+      "phase": 7,
+      "name": "Phase 7 Behavioural Evaluation",
+      "status": "done",
+      "evals": ["tests/eval_phase7.py (10 structural, 4 live)"],
+      "evidence": ["tests/eval_phase7.py"]
+    },
+    {
+      "id": "P8-F001",
+      "phase": 8,
+      "name": "End-to-End Benchmark Suite",
+      "status": "done",
+      "evals": ["tests/benchmark.py"],
+      "evidence": ["tests/benchmark.py"]
+    },
+    {
+      "id": "P8-F002",
+      "phase": 8,
+      "name": "Evaluation Result Reporting",
+      "status": "done",
+      "evals": ["tests/eval_phase8.py"],
+      "evidence": ["tests/eval_phase8.py"]
+    },
+    {
+      "id": "P8-F003",
+      "phase": 8,
+      "name": "Performance Baseline",
+      "status": "done",
+      "evals": ["tests/benchmark.py"],
+      "evidence": ["tests/benchmark.py"]
+    },
+    {
+      "id": "P8-F004",
+      "phase": 8,
+      "name": "Clean-State Reset",
+      "status": "done",
+      "evals": ["test_p8_s007_reset_dry_run"],
+      "evidence": ["scripts/reset.py"]
+    },
+    {
+      "id": "P8-F005",
+      "phase": 8,
+      "name": "Generated-State Cleanup",
+      "status": "done",
+      "evals": ["test_p8_s007_reset_dry_run"],
+      "evidence": ["scripts/reset.py"]
+    },
+    {
+      "id": "P8-F006",
+      "phase": 8,
+      "name": "Repository Health Check",
+      "status": "done",
+      "evals": ["test_p8_s001_check_health_script_passes"],
+      "evidence": ["scripts/check_health.py"]
+    },
+    {
+      "id": "P8-F007",
+      "phase": 8,
+      "name": "Ledger Consistency Check",
+      "status": "done",
+      "evals": ["test_p8_s002_check_ledger_script_passes"],
+      "evidence": ["scripts/check_ledger.py"]
+    },
+    {
+      "id": "P8-F008",
+      "phase": 8,
+      "name": "Deterministic Initialization",
+      "status": "done",
+      "evals": ["test_p8_s012_src_compiles_cleanly"],
+      "evidence": ["init.sh"]
+    },
+    {
+      "id": "P8-F009",
+      "phase": 8,
+      "name": "Final Smoke Test",
+      "status": "done",
+      "evals": ["tests/benchmark.py"],
+      "evidence": ["tests/benchmark.py"]
+    },
+    {
+      "id": "P8-F010",
+      "phase": 8,
+      "name": "Harness Handoff Readiness",
+      "status": "done",
+      "evals": ["test_p8_s010_session_handoff_exists"],
+      "evidence": ["session-handoff.md", "AGENTS.md", "CLAUDE.md"]
+    },
+    {
+      "id": "P8-F011",
+      "phase": 8,
+      "name": "Final Repository Verification",
+      "status": "done",
+      "evals": ["tests/eval_phase8.py (13 structural tests)"],
+      "evidence": ["tests/eval_phase8.py", "scripts/check_health.py", "scripts/check_ledger.py"]
     }
   ]
 }

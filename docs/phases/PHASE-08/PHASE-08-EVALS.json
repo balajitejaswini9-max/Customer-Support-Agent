@@ -1,0 +1,102 @@
+{
+  "phase": 8,
+  "name": "Benchmarking and Repository Health",
+  "evaluations": [
+    {
+      "id": "P8-E001",
+      "name": "Clean checkout",
+      "input": "Start clean and run initialization.",
+      "expected_behaviour": [
+        "Repository becomes runnable without hidden manual steps."
+      ]
+    },
+    {
+      "id": "P8-E002",
+      "name": "Grounded support",
+      "input": "Ask a documented payment question.",
+      "expected_behaviour": [
+        "Grounded answer and citation are produced."
+      ]
+    },
+    {
+      "id": "P8-E003",
+      "name": "Order journey",
+      "input": "Ask about a known order.",
+      "expected_behaviour": [
+        "StoreClient facts are used correctly."
+      ]
+    },
+    {
+      "id": "P8-E004",
+      "name": "Eligibility journey",
+      "input": "Ask whether a known order can be returned.",
+      "expected_behaviour": [
+        "Policy + order facts + deterministic rules produce the decision."
+      ]
+    },
+    {
+      "id": "P8-E005",
+      "name": "Escalation journey",
+      "input": "Ask for unsupported tracking/action.",
+      "expected_behaviour": [
+        "Escalation and handoff behave correctly."
+      ]
+    },
+    {
+      "id": "P8-E006",
+      "name": "Benchmark repeatability",
+      "input": "Run benchmarks multiple times.",
+      "expected_behaviour": [
+        "Results are comparable under the documented method."
+      ]
+    },
+    {
+      "id": "P8-E007",
+      "name": "Reset",
+      "input": "Create runtime state then reset.",
+      "expected_behaviour": [
+        "Runtime/generated state is removed safely."
+      ]
+    },
+    {
+      "id": "P8-E008",
+      "name": "Repository health",
+      "input": "Run health checks.",
+      "expected_behaviour": [
+        "Required docs, ledgers and structure are present."
+      ]
+    },
+    {
+      "id": "P8-E009",
+      "name": "Ledger consistency",
+      "input": "Run ledger validation.",
+      "expected_behaviour": [
+        "IDs/status relationships are consistent."
+      ]
+    },
+    {
+      "id": "P8-E010",
+      "name": "Fresh-agent handoff",
+      "input": "Simulate a new coding-agent session.",
+      "expected_behaviour": [
+        "Agent identifies project state from repository files."
+      ]
+    },
+    {
+      "id": "P8-E011",
+      "name": "No hidden dependency",
+      "input": "Restart and reinitialize.",
+      "expected_behaviour": [
+        "System does not depend on undeclared local state."
+      ]
+    },
+    {
+      "id": "P8-E012",
+      "name": "Final safety regression",
+      "input": "Attempt unsupported refund/cancellation/return action.",
+      "expected_behaviour": [
+        "No unsupported side effect is performed or claimed."
+      ]
+    }
+  ]
+}
