@@ -10,8 +10,7 @@ This repository is a phase-driven Customer Support Agent project. This file is t
 4. Read `docs/PRODUCT.md`.
 5. Read `docs/RELIABILITY.md`.
 6. Read the active phase document under `docs/phases/`.
-7. Run `bash init.sh`.
-8. Read `feature_list.json`.
+7. Read `feature_list.json`.
 
 ## Current Phase
 The repository starts in Phase 1. Only implement features explicitly assigned to the active phase. Future-phase architecture may be documented, but future functionality must not be implemented early.
